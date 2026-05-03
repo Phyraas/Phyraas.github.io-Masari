@@ -1,0 +1,2630 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مولّد خطط تعلّم شخصية</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+  <!-- Intégration du logo du site -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='100' cy='100' r='100' fill='%231a2744'/%3E%3Cpath d='M 0,100 Q 60,60 100,100 Q 140,140 200,100 L 200,200 L 0,200 Z' fill='%23e8941a'/%3E%3Crect x='88' y='22' width='18' height='18' rx='2' transform='rotate(45 97 31)' fill='%23111'/%3E%3Crect x='112' y='22' width='14' height='14' rx='2' transform='rotate(45 119 29)' fill='%23fff'/%3E%3Ctext x='100' y='130' text-anchor='middle' font-family='serif' font-size='80' font-weight='900' fill='%23111'%3E%D9%85%3C/text%3E%3Crect x='88' y='165' width='14' height='14' rx='1' transform='rotate(45 95 172)' fill='%23111'/%3E%3Crect x='104' y='165' width='14' height='14' rx='1' transform='rotate(45 111 172)' fill='%23111'/%3E%3C/svg%3E" />
+  <link rel="shortcut icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='100' cy='100' r='100' fill='%231a2744'/%3E%3Cpath d='M 0,100 Q 60,60 100,100 Q 140,140 200,100 L 200,200 L 0,200 Z' fill='%23e8941a'/%3E%3Crect x='88' y='22' width='18' height='18' rx='2' transform='rotate(45 97 31)' fill='%23111'/%3E%3Crect x='112' y='22' width='14' height='14' rx='2' transform='rotate(45 119 29)' fill='%23fff'/%3E%3Ctext x='100' y='130' text-anchor='middle' font-family='serif' font-size='80' font-weight='900' fill='%23111'%3E%D9%85%3C/text%3E%3Crect x='88' y='165' width='14' height='14' rx='1' transform='rotate(45 95 172)' fill='%23111'/%3E%3Crect x='104' y='165' width='14' height='14' rx='1' transform='rotate(45 111 172)' fill='%23111'/%3E%3C/svg%3E" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <style>
+    :root {
+      --primary: #2563EB;
+      --primary-dark: #1D4ED8;
+      --primary-light: #DBEAFE;
+      --secondary: #10B981;
+      --secondary-light: #D1FAE5;
+      --accent: #F59E0B;
+      --accent-light: #FEF3C7;
+      --dark: #1F2937;
+      --medium: #6B7280;
+      --light: #F3F4F6;
+      --white: #FFFFFF;
+      --danger: #EF4444;
+      --gradient-1: linear-gradient(135deg, #2563EB, #10B981);
+      --gradient-2: linear-gradient(135deg, #1D4ED8, #7C3AED);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+      --shadow-lg: 0 10px 40px rgba(0,0,0,0.14);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --radius-xs: 8px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Tajawal', 'Cairo', sans-serif;
+      background: var(--white);
+      color: var(--dark);
+      direction: rtl;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ===================== UTILITIES ===================== */
+    .hidden { display: none !important; }
+    .section-page { min-height: 100vh; }
+
+    /* ===================== ANIMATIONS ===================== */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes progressBar {
+      from { width: 0%; }
+      to { width: 100%; }
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    @keyframes bounceIn {
+      0% { opacity: 0; transform: scale(0.3); }
+      50% { opacity: 1; transform: scale(1.05); }
+      70% { transform: scale(0.9); }
+      100% { transform: scale(1); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ===================== LANDING PAGE ===================== */
+    #page-landing {
+      background: linear-gradient(135deg, #0F172A 0%, #1E3A5F 40%, #0F4C35 100%);
+      background-size: 200% 200%;
+      animation: gradientMove 8s ease infinite;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #page-landing::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(37,99,235,0.25) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(16,185,129,0.25) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(124,58,237,0.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .landing-particles {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.15;
+      animation: float 6s ease-in-out infinite;
+    }
+    .particle:nth-child(1) { width:80px; height:80px; background:var(--primary); top:10%; left:10%; animation-delay:0s; }
+    .particle:nth-child(2) { width:50px; height:50px; background:var(--secondary); top:20%; right:15%; animation-delay:1s; }
+    .particle:nth-child(3) { width:120px; height:120px; background:var(--accent); bottom:20%; left:20%; animation-delay:2s; }
+    .particle:nth-child(4) { width:60px; height:60px; background:#7C3AED; bottom:30%; right:10%; animation-delay:0.5s; }
+    .particle:nth-child(5) { width:40px; height:40px; background:var(--primary); top:50%; left:50%; animation-delay:1.5s; }
+    .particle:nth-child(6) { width:90px; height:90px; background:var(--secondary); top:70%; right:40%; animation-delay:3s; }
+
+    .landing-nav {
+      position: relative;
+      z-index: 10;
+      padding: 24px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-logo {
+      font-family: 'Cairo', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-logo span { font-size: 1.6rem; }
+
+    .landing-hero {
+      position: relative;
+      z-index: 10;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px 80px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 32px;
+      animation: fadeIn 0.6s ease 0.2s both;
+    }
+
+    .hero-title {
+      font-family: 'Cairo', sans-serif;
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 900;
+      color: white;
+      line-height: 1.25;
+      margin-bottom: 16px;
+      animation: fadeIn 0.6s ease 0.4s both;
+    }
+    .hero-title .highlight {
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: rgba(255,255,255,0.8);
+      font-weight: 500;
+      margin-bottom: 24px;
+      animation: fadeIn 0.6s ease 0.5s both;
+    }
+
+    .hero-description {
+      max-width: 700px;
+      font-size: clamp(0.95rem, 2vw, 1.05rem);
+      color: rgba(255,255,255,0.65);
+      line-height: 1.9;
+      margin-bottom: 48px;
+      animation: fadeIn 0.6s ease 0.6s both;
+    }
+
+    .hero-cta {
+      animation: fadeIn 0.6s ease 0.7s both;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--gradient-1);
+      color: white;
+      font-family: 'Cairo', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      padding: 18px 48px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 32px rgba(37,99,235,0.4);
+      text-decoration: none;
+      animation: pulse 2s ease infinite 1.5s;
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 16px 48px rgba(37,99,235,0.5);
+    }
+    .btn-primary:active { transform: translateY(0) scale(0.98); }
+
+    .hero-features {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 56px;
+      animation: fadeIn 0.6s ease 0.9s both;
+    }
+    .feature-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      min-width: 160px;
+      transition: all 0.3s ease;
+    }
+    .feature-item:hover {
+      background: rgba(255,255,255,0.14);
+      transform: translateY(-4px);
+    }
+    .feature-icon { font-size: 2rem; }
+    .feature-text { color: rgba(255,255,255,0.85); font-size: 0.9rem; font-weight: 500; text-align: center; }
+
+    /* ===================== FORM PAGE ===================== */
+    #page-form {
+      background: var(--light);
+      min-height: 100vh;
+      padding-bottom: 60px;
+    }
+
+    .form-header {
+      background: var(--gradient-2);
+      padding: 32px 24px;
+      text-align: center;
+      color: white;
+    }
+    .form-header h2 {
+      font-family: 'Cairo', sans-serif;
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .form-header p { font-size: 0.95rem; opacity: 0.85; }
+
+    /* Progress Bar */
+    .progress-container {
+      background: rgba(255,255,255,0.15);
+      border-radius: 50px;
+      height: 8px;
+      margin: 20px auto 0;
+      max-width: 500px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), #34D399);
+      border-radius: 50px;
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .progress-text {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.85rem;
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    .form-content {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 32px 20px;
+    }
+
+    /* Step */
+    .step {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      padding: 40px 36px;
+      animation: fadeInUp 0.4s ease;
+    }
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: var(--primary-light);
+      color: var(--primary);
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+    .step-question {
+      font-family: 'Cairo', sans-serif;
+      font-size: clamp(1.2rem, 3.5vw, 1.6rem);
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .step-hint {
+      font-size: 0.9rem;
+      color: var(--medium);
+      margin-bottom: 28px;
+    }
+
+    /* Options Grid */
+    .options-grid {
+      display: grid;
+      gap: 14px;
+    }
+    .options-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .options-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .options-grid.cols-auto { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+    .option-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--white);
+      border: 2.5px solid var(--light);
+      border-radius: var(--radius-sm);
+      padding: 18px 20px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      user-select: none;
+    }
+    .option-card:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+    .option-card.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.15), var(--shadow-sm);
+    }
+    .option-card.selected .option-check { opacity: 1; }
+
+    .option-emoji { font-size: 1.8rem; flex-shrink: 0; }
+    .option-text { flex: 1; }
+    .option-label { font-weight: 700; font-size: 0.95rem; color: var(--dark); display: block; }
+    .option-sub { font-size: 0.8rem; color: var(--medium); display: block; margin-top: 2px; }
+    .option-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.75rem;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    /* Error message */
+    .error-msg {
+      color: var(--danger);
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-top: 12px;
+      display: none;
+      align-items: center;
+      gap: 6px;
+    }
+    .error-msg.show { display: flex; }
+
+    /* Form Navigation */
+    .form-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 32px;
+      gap: 12px;
+    }
+    .btn-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: var(--radius-sm);
+      font-family: 'Tajawal', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border: none;
+    }
+    .btn-next {
+      background: var(--gradient-1);
+      color: white;
+      box-shadow: 0 4px 14px rgba(37,99,235,0.3);
+    }
+    .btn-next:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,0.4); }
+    .btn-prev {
+      background: var(--light);
+      color: var(--dark);
+    }
+    .btn-prev:hover { background: #E5E7EB; }
+    .btn-generate {
+      background: linear-gradient(135deg, var(--secondary), #059669);
+      color: white;
+      font-size: 1.1rem;
+      padding: 16px 36px;
+      box-shadow: 0 4px 14px rgba(16,185,129,0.35);
+    }
+    .btn-generate:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(16,185,129,0.45); }
+
+    /* ===================== LOADING ===================== */
+    #page-loading {
+      background: var(--gradient-2);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+    }
+    .loading-icon { font-size: 4rem; margin-bottom: 24px; animation: float 2s ease-in-out infinite; }
+    .loading-title {
+      font-family: 'Cairo', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 12px;
+    }
+    .loading-subtitle { color: rgba(255,255,255,0.75); font-size: 1rem; margin-bottom: 40px; }
+    .loading-bar-wrapper {
+      width: 320px;
+      max-width: 90vw;
+      background: rgba(255,255,255,0.15);
+      border-radius: 50px;
+      height: 10px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .loading-bar {
+      height: 100%;
+      border-radius: 50px;
+      background: linear-gradient(90deg, #34D399, var(--accent), #60A5FA);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s linear infinite, progressBar 3s ease forwards;
+    }
+    .loading-steps { display: flex; flex-direction: column; gap: 10px; }
+    .loading-step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.9rem;
+      padding: 10px 20px;
+      background: rgba(255,255,255,0.08);
+      border-radius: var(--radius-sm);
+    }
+    .loading-step.active { color: white; background: rgba(255,255,255,0.15); }
+    .loading-step.done { color: #34D399; }
+    .ls-icon { font-size: 1.1rem; }
+
+    /* ===================== RESULTS PAGE ===================== */
+    #page-results {
+      background: var(--light);
+      min-height: 100vh;
+    }
+
+    .results-header {
+      background: var(--gradient-1);
+      padding: 48px 24px 64px;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .results-header::after {
+      content: '';
+      position: absolute;
+      bottom: -30px;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: var(--light);
+      clip-path: ellipse(55% 100% at 50% 100%);
+    }
+    .results-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      padding: 6px 20px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      animation: bounceIn 0.6s ease;
+    }
+    .results-title {
+      font-family: 'Cairo', sans-serif;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 900;
+      margin-bottom: 12px;
+      animation: fadeIn 0.5s ease 0.2s both;
+    }
+    .results-subtitle {
+      font-size: 1rem;
+      opacity: 0.85;
+      animation: fadeIn 0.5s ease 0.3s both;
+    }
+
+    .results-summary {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 24px;
+      animation: fadeIn 0.5s ease 0.4s both;
+    }
+    .summary-tag {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: white;
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .results-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+    }
+
+    /* Result Actions */
+    .result-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 40px;
+      animation: fadeIn 0.5s ease 0.5s both;
+    }
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+      font-family: 'Tajawal', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border: none;
+    }
+    .btn-restart {
+      background: white;
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
+      border: 2px solid var(--primary-light);
+    }
+    .btn-restart:hover { background: var(--primary-light); transform: translateY(-2px); }
+    .btn-print {
+      background: var(--dark);
+      color: white;
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-print:hover { background: #374151; transform: translateY(-2px); }
+
+    /* Result Sections */
+    .result-section {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      margin-bottom: 28px;
+      overflow: hidden;
+      animation: fadeInUp 0.5s ease both;
+    }
+    .result-section:nth-child(2) { animation-delay: 0.1s; }
+    .result-section:nth-child(3) { animation-delay: 0.2s; }
+    .result-section:nth-child(4) { animation-delay: 0.3s; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 24px 28px;
+      background: linear-gradient(135deg, var(--primary-light), #EDE9FE);
+      border-bottom: 1px solid rgba(37,99,235,0.1);
+    }
+    .section-header.green { background: linear-gradient(135deg, var(--secondary-light), #ECFDF5); }
+    .section-header.amber { background: linear-gradient(135deg, var(--accent-light), #FFFBEB); }
+    .section-header.purple { background: linear-gradient(135deg, #EDE9FE, #FAF5FF); }
+
+    .section-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .section-icon.green { background: var(--secondary); }
+    .section-icon.amber { background: var(--accent); }
+    .section-icon.purple { background: #7C3AED; }
+
+    .section-title-wrap h3 {
+      font-family: 'Cairo', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--dark);
+    }
+    .section-title-wrap p { font-size: 0.85rem; color: var(--medium); margin-top: 2px; }
+
+    .section-body { padding: 28px; }
+
+    /* Plan phases */
+    .plan-goal {
+      background: linear-gradient(135deg, var(--primary-light), #EDE9FE);
+      border-right: 4px solid var(--primary);
+      border-radius: var(--radius-sm);
+      padding: 18px 20px;
+      margin-bottom: 24px;
+      font-weight: 600;
+      color: var(--primary-dark);
+      font-size: 1.05rem;
+    }
+
+    .phases-container { display: flex; flex-direction: column; gap: 16px; }
+    .phase-card {
+      display: flex;
+      gap: 18px;
+      padding: 20px;
+      background: var(--light);
+      border-radius: var(--radius-sm);
+      transition: all 0.25s ease;
+    }
+    .phase-card:hover { background: var(--primary-light); transform: translateX(-4px); }
+
+    .phase-number {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .phase-content { flex: 1; }
+    .phase-title {
+      font-weight: 700;
+      color: var(--primary-dark);
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+    .phase-desc { color: var(--medium); font-size: 0.9rem; line-height: 1.6; }
+
+    /* Tools cards */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 16px;
+    }
+    .tool-card {
+      border: 1.5px solid var(--light);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      transition: all 0.25s ease;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .tool-card:hover {
+      border-color: var(--secondary);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    .tool-emoji { font-size: 2.2rem; flex-shrink: 0; }
+    .tool-info { flex: 1; }
+    .tool-name { font-weight: 800; color: var(--dark); font-size: 1rem; margin-bottom: 4px; }
+    .tool-function { color: var(--medium); font-size: 0.85rem; margin-bottom: 8px; }
+    .tool-why { color: var(--secondary); font-size: 0.82rem; font-weight: 600; margin-bottom: 10px; }
+    .tool-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--secondary-light);
+      color: var(--secondary);
+      padding: 6px 14px;
+      border-radius: var(--radius-xs);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .tool-link:hover { background: var(--secondary); color: white; }
+
+    /* Specific recommendations inside tool card */
+    .tool-specifics {
+      margin-top: 10px;
+      border-top: 1px dashed #E5E7EB;
+      padding-top: 10px;
+    }
+    .tool-specifics-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .specific-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+      margin-bottom: 5px;
+    }
+    .specific-bullet {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+    .specific-link {
+      font-size: 0.8rem;
+      color: var(--primary-dark);
+      font-weight: 600;
+      text-decoration: none;
+      line-height: 1.4;
+      transition: color 0.2s;
+    }
+    .specific-link:hover { color: var(--secondary); text-decoration: underline; }
+    .specific-desc {
+      font-size: 0.75rem;
+      color: var(--medium);
+      font-weight: 400;
+    }
+    .tool-links-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    /* Schedule Table */
+    .schedule-table-wrapper { overflow-x: auto; border-radius: var(--radius-sm); }
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    .schedule-table thead tr {
+      background: var(--gradient-1);
+    }
+    .schedule-table thead th {
+      color: white;
+      padding: 14px 18px;
+      text-align: right;
+      font-weight: 700;
+      font-family: 'Cairo', sans-serif;
+    }
+    .schedule-table tbody tr { border-bottom: 1px solid #F0F0F0; transition: background 0.15s; }
+    .schedule-table tbody tr:hover { background: var(--primary-light); }
+    .schedule-table tbody tr:nth-child(even) { background: var(--light); }
+    .schedule-table tbody tr:nth-child(even):hover { background: var(--primary-light); }
+    .schedule-table td { padding: 14px 18px; vertical-align: middle; }
+    .day-name { font-weight: 700; color: var(--primary-dark); }
+    .activity-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+    .badge-blue { background: var(--primary-light); color: var(--primary); }
+    .badge-green { background: var(--secondary-light); color: #059669; }
+    .badge-amber { background: var(--accent-light); color: #D97706; }
+    .badge-purple { background: #EDE9FE; color: #7C3AED; }
+    .badge-rest { background: #F3F4F6; color: var(--medium); }
+    .duration-badge {
+      background: var(--dark);
+      color: white;
+      padding: 4px 10px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    /* Tips */
+    .tips-grid { display: flex; flex-direction: column; gap: 14px; }
+    .tip-card {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 18px 20px;
+      background: var(--light);
+      border-radius: var(--radius-sm);
+      border-right: 4px solid var(--accent);
+      transition: all 0.25s ease;
+    }
+    .tip-card:hover { background: var(--accent-light); transform: translateX(-4px); }
+    .tip-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+    .tip-text { color: var(--dark); font-size: 0.92rem; line-height: 1.7; font-weight: 500; }
+
+    /* ===================== PRINT STYLES ===================== */
+    @media print {
+      #page-landing, #page-form, #page-loading { display: none !important; }
+      #page-results { display: block !important; background: white; }
+      .result-actions { display: none !important; }
+      .results-header { background: var(--primary) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .result-section { break-inside: avoid; box-shadow: none; border: 1px solid #E5E7EB; }
+      .tool-link::after { content: " (" attr(href) ")"; font-size: 0.75rem; }
+      body { font-size: 12px; }
+      .section-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .schedule-table thead tr { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+
+    /* ===================== RESPONSIVE ===================== */
+    @media (max-width: 768px) {
+      .landing-nav { padding: 16px 20px; }
+      .hero-features { gap: 12px; }
+      .feature-item { min-width: 130px; padding: 16px 18px; }
+      .step { padding: 28px 20px; }
+      .options-grid.cols-2 { grid-template-columns: 1fr; }
+      .options-grid.cols-3 { grid-template-columns: 1fr 1fr; }
+      .options-grid.cols-auto { grid-template-columns: 1fr; }
+      .form-nav { flex-direction: column-reverse; }
+      .btn-nav { width: 100%; justify-content: center; }
+      .tools-grid { grid-template-columns: 1fr; }
+      .results-content { padding: 24px 14px 40px; }
+      .section-body { padding: 20px 16px; }
+      .section-header { padding: 18px 20px; }
+      .result-actions { flex-direction: column; align-items: stretch; }
+      .btn-action { justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      .options-grid.cols-3 { grid-template-columns: 1fr; }
+      .hero-title { font-size: 1.8rem; }
+      .feature-item { flex-direction: row; min-width: 100%; }
+      .hero-features { flex-direction: column; align-items: center; width: 100%; max-width: 280px; }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .options-grid.cols-auto { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===================== PAGE 1: LANDING ===================== -->
+<section id="page-landing" class="section-page">
+  <div class="landing-particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+  <nav class="landing-nav">
+    <div class="nav-logo">
+      <span>🎓</span>
+  المولد لخطط التعلم </div> 
+    <div style="color: rgba(255,255,255,0.6); font-size:0.85rem;">نسخة 2026</div>
+  </nav>
+  <div class="landing-hero">
+    <div class="hero-badge">✨ مجاني 100% — بدون تسجيل</div>
+    <h1 class="hero-title">
+      مولّد خطط تعلّم
+      <br />
+      <span class="highlight">شخصية ومخصصة</span>
+    </h1>
+    <p class="hero-subtitle">مع توصيات أدوات رقمية مناسبة لك</p>
+    <p class="hero-description">
+      أدخل هدفك التعليمي ومستواك والوقت المتاح لديك،
+      واحصل فوراً على خطة تعلّم مفصّلة مع أدوات ومنصات مختارة خصيصاً لك،
+      وجدول أسبوعي مقترح، ونصائح منهجية مخصصة.
+    </p>
+    <div class="hero-cta">
+      <button class="btn-primary" onclick="startForm()">
+        ابدأ الآن ✦
+        <span style="font-size:1.3rem">🚀</span>
+      </button>
+    </div>
+    <div class="hero-features">
+      <div class="feature-item">
+        <span class="feature-icon">📋</span>
+        <span class="feature-text">خطة تعلّم مفصّلة</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🛠️</span>
+        <span class="feature-text">أدوات رقمية مختارة</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">📅</span>
+        <span class="feature-text">جدول أسبوعي</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">💡</span>
+        <span class="feature-text">نصائح مخصصة</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PAGE 2: FORM ===================== -->
+<section id="page-form" class="section-page hidden">
+  <div class="form-header">
+    <h2>📝 الاستمارة التفاعلية</h2>
+    <p>أجب على 5 أسئلة بسيطة للحصول على خطتك الشخصية</p>
+    <div class="progress-container">
+      <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+    </div>
+    <div class="progress-text" id="progressText">السؤال 1 من 5</div>
+  </div>
+
+  <div class="form-content">
+
+    <!-- STEP 1 -->
+    <div class="step" id="step-1">
+      <div class="step-number">١</div>
+      <h2 class="step-question">ما هدفك التعليمي؟</h2>
+      <p class="step-hint">اختر الهدف الذي يصف تطلعاتك التعليمية بشكل أفضل</p>
+      <div class="options-grid cols-auto" id="options-1">
+        <div class="option-card" onclick="selectOption(1, 'language', this)">
+          <span class="option-emoji">🌍</span>
+          <div class="option-text">
+            <span class="option-label">تعلم لغة جديدة</span>
+            <span class="option-sub">اكتساب مهارات لغوية جديدة</span>
+          </div>
+          <div class="option-check">✓</div>
+        </div>
+        <div class="option-card" onclick="selectOption(1, 'revision', this)">
+          <span class="option-emoji">📚</span>
+          <div class="option-text">
+            <span class="option-label">مراجعة مواد دراسية</span>
+            <span class="option-sub">تحسين الأداء الأكاديمي</span>
+          </div>
+          <div class="option-check">✓</div>
+        </div>
+        <div class="option-card" onclick="selectOption(1, 'programming', this)">
+          <span class="option-emoji">💻</span>
+          <div class="option-text">
+            <span class="option-label">تعلم البرمجة</span>
+            <span class="option-sub">الدخول إلى عالم التكنولوجيا</span>
+          </div>
+          <div class="option-check">✓</div>
+        </div>
+        <div class="option-card" onclick="selectOption(1, 'writing', this)">
+          <span class="option-emoji">✍️</span>
+          <div class="option-text">
+            <span class="option-label">تطوير مهارات كتابية</span>
+            <span class="option-sub">الكتابة الإبداعية والاحترافية</span>
+          </div>
+          <div class="option-check">✓</div>
+        </div>
+        <div class="option-card" onclick="selectOption(1, 'culture', this)">
+          <span class="option-emoji">🧠</span>
+          <div class="option-text">
+            <span class="option-label">ثقافة عامة</span>
+            <span class="option-sub">توسيع المعرفة والآفاق</span>
+          </div>
+          <div class="option-check">✓</div>
+        </div>
+      </div>
+      <div class="error-msg" id="error-1">⚠️ الرجاء اختيار هدف للمتابعة.</div>
+      <div class="form-nav">
+        <div></div>
+        <button class="btn-nav btn-next" onclick="nextStep(1)">التالي ←</button>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step hidden" id="step-2">
+      <div class="step-number">٢</div>
+      <h2 class="step-question">ما لغتك المفضلة للتعلم؟</h2>
+      <p class="step-hint">سنختار لك المحتوى والأدوات المناسبة بهذه اللغة</p>
+      <div class="options-grid cols-2" id="options-2">
+        <div class="option-card" onclick="selectOption(2, 'arabic', this)">
+          <span class="option-emoji">🇸🇦</span>
+          <div class="option-text">
+            <span class="option-label">العربية</span>
+            <span class="option-sub">Arabic</span>
+          </div>
+          <div class="option-check">✓</div>
+        </div>
+        <div class="option-card" onclick="selectOption(2, 'french', this)">
+          <span class="option-emoji">🇫🇷</span>
+          <div class="option-text">
+            <span class="option-label">الفرنسية</span>
+            <span class="option-sub">Français</span>
+          </div>
+          <div class="option-check">✓</div>
+        </div>
+        <div class="option-card" onclick="selectOption(2, 'english', this)">
+          <span class="option-emoji">🇬🇧</span>
+          <div class="option-text">
+            <span class="option-label">الإنجليزية</span>
+            <span class="option-sub">English</span>
+          </div>
+          <div class="option-check">✓</div>
+        </div>
+        <div class="option-card" onclick="selectOption(2, 'any', this)">
+          <span class="option-emoji">🌐</span>
+          <div class="option-text">
+            <span class="option-label">لا يهم</span>
+            <span class="option-sub">Any language</span>
+          </div>
+          <div class="option-check">✓</div>
+        </div>
+      </div>
+      <div class="error-msg" id="error-2">⚠️ الرجاء اختيار لغة للمتابعة.</div>
+      <div class="form-nav">
+        <button class="btn-nav btn-prev" onclick="prevStep(2)">→ السابق</button>
+        <button class="btn-nav btn-next" onclick="nextStep(2)">التالي ←</button>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step hidden" id="step-3">
+      <div class="step-number">٣</div>
+      <h2 class="step-question">ما مستواك الحالي؟</h2>
+      <p class="step-hint">كن صادقاً مع نفسك — لا يوجد مستوى أفضل من آخر</p>
+      <div class="options-grid cols-3" id="options-3">
+        <div class="option-card" onclick="selectOption(3, 'beginner', this)">
+          <span class="option-emoji">🟢</span>
+          <div class="option-text">
+            <span class="option-label">مبتدئ</span>
+            <span class="option-sub">أبدأ من الصفر تقريباً</span>
+          </div>
+          <div class="option-check">✓</div>
+        </div>
+        <div class="option-card" onclick="selectOption(3, 'intermediate', this)">
+          <span class="option-emoji">🟡</span>
+          <div class="option-text">
+            <span class="option-label">متوسط</span>
+            <span class="option-sub">لدي قاعدة جيدة</span>
+          </div>
+          <div class="option-check">✓</div>
+        </div>
+        <div class="option-card" onclick="selectOption(3, 'advanced', this)">
+          <span class="option-emoji">🔴</span>
+          <div class="option-text">
+            <span class="option-label">متقدم</span>
+            <span class="option-sub">مستوى عالٍ ومتمكّن</span>
+          </div>
+          <div class="option-check">✓</div>
+        </div>
+      </div>
+      <div class="error-msg" id="error-3">⚠️ الرجاء اختيار مستواك للمتابعة.</div>
+      <div class="form-nav">
+        <button class="btn-nav btn-prev" onclick="prevStep(3)">→ السابق</button>
+        <button class="btn-nav btn-next" onclick="nextStep(3)">التالي ←</button>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="step hidden" id="step-4">
+      <div class="step-number">٤</div>
+      <h2 class="step-question">كم من الوقت تستطيع تخصيصه أسبوعياً؟</h2>
+      <p class="step-hint">كن واقعياً — الاستمرارية أهم من الكمية</p>
+      <div class="options-grid cols-3" id="options-4">
+        <div class="option-card" onclick="selectOption(4, 'lt2', this)">
+          <span class="option-emoji">⏱️</span>
+          <div class="option-text">
+            <span class="option-label">أقل من ساعتين</span>
+            <span class="option-sub">~15-20 دقيقة يومياً</span>
+          </div>
+          <div class="option-check">✓</div>
+        </div>
+        <div class="option-card" onclick="selectOption(4, '2to5', this)">
+          <span class="option-emoji">⏰</span>
+          <div class="option-text">
+            <span class="option-label">2 – 5 ساعات</span>
+            <span class="option-sub">~25-30 دقيقة يومياً</span>
+          </div>
+          <div class="option-check">✓</div>
+        </div>
+        <div class="option-card" onclick="selectOption(4, 'gt5', this)">
+          <span class="option-emoji">🕐</span>
+          <div class="option-text">
+            <span class="option-label">أكثر من 5 ساعات</span>
+            <span class="option-sub">~45-60 دقيقة يومياً</span>
+          </div>
+          <div class="option-check">✓</div>
+        </div>
+      </div>
+      <div class="error-msg" id="error-4">⚠️ الرجاء اختيار الوقت المتاح للمتابعة.</div>
+      <div class="form-nav">
+        <button class="btn-nav btn-prev" onclick="prevStep(4)">→ السابق</button>
+        <button class="btn-nav btn-next" onclick="nextStep(4)">التالي ←</button>
+      </div>
+    </div>
+
+    <!-- STEP 5 -->
+    <div class="step hidden" id="step-5">
+      <div class="step-number">٥</div>
+      <h2 class="step-question">ما أسلوب التعلم الذي تفضله؟</h2>
+      <p class="step-hint">سنختار الأدوات الأنسب لأسلوب تعلّمك</p>
+      <div class="options-grid cols-2" id="options-5">
+        <div class="option-card" onclick="selectOption(5, 'video', this)">
+          <span class="option-emoji">🎥</span>
+          <div class="option-text">
+            <span class="option-label">فيديوهات</span>
+            <span class="option-sub">أتعلم بالمشاهدة والاستماع</span>
+          </div>
+          <div class="option-check">✓</div>
+        </div>
+        <div class="option-card" onclick="selectOption(5, 'text', this)">
+          <span class="option-emoji">📖</span>
+          <div class="option-text">
+            <span class="option-label">قراءة نصوص</span>
+            <span class="option-sub">أفضل القراءة والتحليل</span>
+          </div>
+          <div class="option-check">✓</div>
+        </div>
+        <div class="option-card" onclick="selectOption(5, 'interactive', this)">
+          <span class="option-emoji">🎮</span>
+          <div class="option-text">
+            <span class="option-label">تمارين تفاعلية</span>
+            <span class="option-sub">أتعلم بالممارسة والتجربة</span>
+          </div>
+          <div class="option-check">✓</div>
+        </div>
+        <div class="option-card" onclick="selectOption(5, 'mixed', this)">
+          <span class="option-emoji">🔄</span>
+          <div class="option-text">
+            <span class="option-label">مزيج من الكل</span>
+            <span class="option-sub">أنوّع بين الأساليب</span>
+          </div>
+          <div class="option-check">✓</div>
+        </div>
+      </div>
+      <div class="error-msg" id="error-5">⚠️ الرجاء اختيار أسلوب التعلم للمتابعة.</div>
+      <div class="form-nav">
+        <button class="btn-nav btn-prev" onclick="prevStep(5)">→ السابق</button>
+        <button class="btn-nav btn-generate" onclick="generatePlan()">
+          🎯 احصل على خطتك
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== PAGE 3: LOADING ===================== -->
+<section id="page-loading" class="hidden">
+  <div style="background: var(--gradient-2); min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:24px;">
+    <div class="loading-icon">🔮</div>
+    <div class="loading-title">جارٍ إنشاء خطتك الشخصية...</div>
+    <div class="loading-subtitle">نحلّل إجاباتك ونختار أفضل الموارد لك</div>
+    <div class="loading-bar-wrapper">
+      <div class="loading-bar" id="loadingBar"></div>
+    </div>
+    <div class="loading-steps" id="loadingSteps">
+      <div class="loading-step active" id="ls1"><span class="ls-icon">🔍</span> تحليل هدفك التعليمي...</div>
+      <div class="loading-step" id="ls2"><span class="ls-icon">📊</span> تقييم مستواك وتوقيتك...</div>
+      <div class="loading-step" id="ls3"><span class="ls-icon">🛠️</span> اختيار الأدوات المناسبة...</div>
+      <div class="loading-step" id="ls4"><span class="ls-icon">📅</span> إنشاء الجدول الأسبوعي...</div>
+      <div class="loading-step" id="ls5"><span class="ls-icon">✅</span> خطتك جاهزة!</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PAGE 4: RESULTS ===================== -->
+<section id="page-results" class="hidden">
+  <div class="results-header">
+    <div class="results-badge">🎉 خطتك الشخصية جاهزة!</div>
+    <h1 class="results-title">خطتك التعليمية المخصصة</h1>
+    <p class="results-subtitle">بناءً على إجاباتك، أعددنا لك هذه الخطة الشاملة</p>
+    <div class="results-summary" id="resultsSummary"></div>
+  </div>
+
+  <div class="results-content">
+    <div class="result-actions">
+      <button class="btn-action btn-restart" onclick="restartQuiz()">🔄 ابدأ من جديد</button>
+      <button class="btn-action btn-print" onclick="window.print()">🖨️ طباعة الخطة</button>
+    </div>
+
+    <!-- Section 1: Plan -->
+    <div class="result-section" id="section-plan">
+      <div class="section-header">
+        <div class="section-icon">📌</div>
+        <div class="section-title-wrap">
+          <h3>خطتك التعليمية</h3>
+          <p>مراحل تعلّم منظّمة ومخصصة لك</p>
+        </div>
+      </div>
+      <div class="section-body" id="planContent"></div>
+    </div>
+
+    <!-- Section 2: Tools -->
+    <div class="result-section" id="section-tools">
+      <div class="section-header green">
+        <div class="section-icon green">🛠️</div>
+        <div class="section-title-wrap">
+          <h3>الأدوات الموصى بها</h3>
+          <p>منصات وأدوات مختارة خصيصاً لأسلوبك وهدفك</p>
+        </div>
+      </div>
+      <div class="section-body" id="toolsContent"></div>
+    </div>
+
+    <!-- Section 3: Schedule -->
+    <div class="result-section" id="section-schedule">
+      <div class="section-header amber">
+        <div class="section-icon amber">📅</div>
+        <div class="section-title-wrap">
+          <h3>جدولك الأسبوعي المقترح</h3>
+          <p>توزيع ذكي لوقتك على مدار الأسبوع</p>
+        </div>
+      </div>
+      <div class="section-body" id="scheduleContent"></div>
+    </div>
+
+    <!-- Section 4: Tips -->
+    <div class="result-section" id="section-tips">
+      <div class="section-header purple">
+        <div class="section-icon purple">💡</div>
+        <div class="section-title-wrap">
+          <h3>نصائح مخصصة لك</h3>
+          <p>توصيات منهجية لضمان نجاحك وتقدمك</p>
+        </div>
+      </div>
+      <div class="section-body" id="tipsContent"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+// ===================== STATE =====================
+const answers = { goal: null, language: null, level: null, time: null, style: null };
+let currentStep = 1;
+
+// ===================== NAVIGATION =====================
+function startForm() {
+  document.getElementById('page-landing').classList.add('hidden');
+  document.getElementById('page-form').classList.remove('hidden');
+  updateProgress(1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showStep(n) {
+  for (let i = 1; i <= 5; i++) {
+    const el = document.getElementById('step-' + i);
+    if (el) el.classList.add('hidden');
+  }
+  const target = document.getElementById('step-' + n);
+  if (target) target.classList.remove('hidden');
+  currentStep = n;
+  updateProgress(n);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateProgress(step) {
+  const pct = ((step - 1) / 5) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = 'السؤال ' + toArabicNum(step) + ' من ٥';
+}
+
+function toArabicNum(n) {
+  const map = { 1: '١', 2: '٢', 3: '٣', 4: '٤', 5: '٥' };
+  return map[n] || n;
+}
+
+function selectOption(step, value, el) {
+  const grid = document.getElementById('options-' + step);
+  grid.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  const keys = ['goal', 'language', 'level', 'time', 'style'];
+  answers[keys[step - 1]] = value;
+  const errEl = document.getElementById('error-' + step);
+  if (errEl) errEl.classList.remove('show');
+}
+
+function nextStep(current) {
+  const keys = ['goal', 'language', 'level', 'time', 'style'];
+  const key = keys[current - 1];
+  if (!answers[key]) {
+    document.getElementById('error-' + current).classList.add('show');
+    return;
+  }
+  showStep(current + 1);
+}
+
+function prevStep(current) { showStep(current - 1); }
+
+// ===================== GENERATE PLAN =====================
+function generatePlan() {
+  if (!answers.style) {
+    document.getElementById('error-5').classList.add('show');
+    return;
+  }
+  document.getElementById('page-form').classList.add('hidden');
+  document.getElementById('page-loading').classList.remove('hidden');
+  window.scrollTo({ top: 0 });
+
+  // Animate loading steps
+  const delays = [400, 900, 1400, 1900, 2400];
+  const ids = ['ls1', 'ls2', 'ls3', 'ls4', 'ls5'];
+  ids.forEach((id, i) => {
+    setTimeout(() => {
+      ids.forEach(x => {
+        const el = document.getElementById(x);
+        el.classList.remove('active');
+      });
+      // Mark previous as done
+      for (let j = 0; j < i; j++) {
+        document.getElementById(ids[j]).classList.add('done');
+      }
+      document.getElementById(id).classList.add('active');
+    }, delays[i]);
+  });
+
+  setTimeout(() => {
+    document.getElementById('page-loading').classList.add('hidden');
+    document.getElementById('page-results').classList.remove('hidden');
+    buildResults();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, 3200);
+}
+
+function restartQuiz() {
+  Object.keys(answers).forEach(k => answers[k] = null);
+  currentStep = 1;
+  // Clear selections
+  for (let i = 1; i <= 5; i++) {
+    const grid = document.getElementById('options-' + i);
+    if (grid) grid.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+    const err = document.getElementById('error-' + i);
+    if (err) err.classList.remove('show');
+  }
+  document.getElementById('page-results').classList.add('hidden');
+  document.getElementById('page-landing').classList.remove('hidden');
+  showStep(1);
+  // Reset steps display
+  for (let i = 2; i <= 5; i++) {
+    document.getElementById('step-' + i).classList.add('hidden');
+  }
+  document.getElementById('step-1').classList.remove('hidden');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ===================== DATA: PLANS =====================
+const planData = {
+  language: {
+    beginner: {
+      lt2: {
+        goal: 'اكتساب الأساسيات خلال 12 أسبوعاً بوتيرة مريحة.',
+        phases: [
+          { title: 'المرحلة الأولى (الأسبوع 1–4)', desc: 'تعلم الحروف والأصوات والتحيات الأساسية. التعرف على بنية اللغة والنطق الصحيح.' },
+          { title: 'المرحلة الثانية (الأسبوع 5–8)', desc: 'حفظ 200 كلمة شائعة وتكوين جمل بسيطة. ممارسة التحيات اليومية.' },
+          { title: 'المرحلة الثالثة (الأسبوع 9–12)', desc: 'فهم نصوص قصيرة جداً والاستماع اليومي. التعرف على الأنماط اللغوية الشائعة.' }
+        ]
+      },
+      '2to5': {
+        goal: 'اكتساب أساسيات اللغة خلال 8 أسابيع.',
+        phases: [
+          { title: 'المرحلة الأولى (الأسبوع 1–3)', desc: 'تعلم المفردات الأساسية والتحيات اليومية. بناء قاموس شخصي من 300 كلمة.' },
+          { title: 'المرحلة الثانية (الأسبوع 4–6)', desc: 'بناء جمل بسيطة وفهم النصوص القصيرة. التدرب على القراءة والكتابة البسيطة.' },
+          { title: 'المرحلة الثالثة (الأسبوع 7–8)', desc: 'محادثات مبسّطة واستماع يومي. ممارسة التواصل الفعلي بالأدوات الرقمية.' }
+        ]
+      },
+      gt5: {
+        goal: 'الوصول إلى مستوى ما قبل المتوسط خلال 6 أسابيع.',
+        phases: [
+          { title: 'المرحلة الأولى (الأسبوع 1–2)', desc: 'إتقان الأساسيات والمفردات الـ300 الأكثر استخداماً. إتقان النطق والقواعد الأساسية.' },
+          { title: 'المرحلة الثانية (الأسبوع 3–4)', desc: 'قراءة نصوص بسيطة وكتابة فقرات قصيرة. ربط المفردات في سياقات حقيقية.' },
+          { title: 'المرحلة الثالثة (الأسبوع 5–6)', desc: 'محادثات يومية واستماع مكثف. التدرب مع منصات التحدث وممارسة اللغة بشكل مكثف.' }
+        ]
+      }
+    },
+    intermediate: {
+      lt2: {
+        goal: 'تعزيز مهاراتك وسد الثغرات خلال 10 أسابيع.',
+        phases: [
+          { title: 'المرحلة الأولى (الأسبوع 1–4)', desc: 'مراجعة القواعد الأساسية وتوسيع المفردات. تحديد نقاط الضعف والعمل عليها.' },
+          { title: 'المرحلة الثانية (الأسبوع 5–7)', desc: 'قراءة مقالات قصيرة وممارسة الكتابة. التعرض لمحتوى أصلي باللغة.' },
+          { title: 'المرحلة الثالثة (الأسبوع 8–10)', desc: 'استماع لبودكاست ومحادثات متوسطة. زيادة الانغماس في اللغة تدريجياً.' }
+        ]
+      },
+      '2to5': {
+        goal: 'الانتقال نحو مستوى متقدم خلال 8 أسابيع.',
+        phases: [
+          { title: 'المرحلة الأولى (الأسبوع 1–3)', desc: 'إتقان القواعد المتقدمة والمفردات المتخصصة. التعمق في أسلوب اللغة وتراكيبها.' },
+          { title: 'المرحلة الثانية (الأسبوع 4–6)', desc: 'كتابة مقالات وفهم محتوى أصلي. تحليل النصوص الأدبية والأكاديمية.' },
+          { title: 'المرحلة الثالثة (الأسبوع 7–8)', desc: 'مناقشات معمّقة وإنتاج محتوى. المشاركة في محادثات حقيقية مع الناطقين الأصليين.' }
+        ]
+      },
+      gt5: {
+        goal: 'الوصول إلى إتقان شبه كامل خلال 6 أسابيع.',
+        phases: [
+          { title: 'المرحلة الأولى (الأسبوع 1–2)', desc: 'دراسة مكثفة للقواعد والأساليب المتقدمة. التعمق في الفروق الدقيقة للغة.' },
+          { title: 'المرحلة الثانية (الأسبوع 3–4)', desc: 'الانغماس الكامل: أفلام، كتب، بودكاست. العيش باللغة قدر الإمكان.' },
+          { title: 'المرحلة الثالثة (الأسبوع 5–6)', desc: 'إنتاج محتوى وممارسة يومية مع ناطقين أصليين. إنشاء مدونة أو محتوى باللغة.' }
+        ]
+      }
+    },
+    advanced: {
+      lt2: {
+        goal: 'الإتقان والتخصص في مجال محدد خلال 8 أسابيع.',
+        phases: [
+          { title: 'المرحلة الأولى (الأسبوع 1–3)', desc: 'التخصص في مجال معين (أعمال، أكاديمي، أدب). سد الثغرات المتبقية في المعرفة.' },
+          { title: 'المرحلة الثانية (الأسبوع 4–6)', desc: 'إنتاج محتوى متقدم (مقالات، عروض، فيديوهات). الوصول إلى مستوى احترافي.' },
+          { title: 'المرحلة الثالثة (الأسبوع 7–8)', desc: 'تدريس الآخرين والممارسة الاحترافية. تعزيز المعرفة من خلال التعليم.' }
+        ]
+      },
+      '2to5': {
+        goal: 'الإتقان والتخصص في مجال محدد خلال 8 أسابيع.',
+        phases: [
+          { title: 'المرحلة الأولى (الأسبوع 1–3)', desc: 'التخصص في مجال معين (أعمال، أكاديمي، أدب). توسيع المفردات التخصصية.' },
+          { title: 'المرحلة الثانية (الأسبوع 4–6)', desc: 'إنتاج محتوى متقدم ومراجعة من ناطقين أصليين. بناء شبكة لغوية.' },
+          { title: 'المرحلة الثالثة (الأسبوع 7–8)', desc: 'تدريس الآخرين والممارسة الاحترافية. المساهمة في مجتمعات اللغة.' }
+        ]
+      },
+      gt5: {
+        goal: 'الإتقان التام والتميز الاحترافي خلال 6 أسابيع.',
+        phases: [
+          { title: 'المرحلة الأولى (الأسبوع 1–2)', desc: 'التخصص الاحترافي والتعمق في المجال المختار. إتقان الأساليب الراقية.' },
+          { title: 'المرحلة الثانية (الأسبوع 3–4)', desc: 'إنتاج محتوى احترافي كثيف ومراجعته مع خبراء. نشر ومشاركة المحتوى.' },
+          { title: 'المرحلة الثالثة (الأسبوع 5–6)', desc: 'تدريس الآخرين وبناء مجتمع. الوصول إلى مستوى المدرب أو المحترف.' }
+        ]
+      }
+    }
+  },
+  revision: {
+    beginner: {
+      goal: 'بناء أساس متين في المواد الدراسية خلال 8 أسابيع.',
+      phases: [
+        { title: 'المرحلة الأولى (الأسبوع 1–3)', desc: 'مراجعة المفاهيم الأساسية وتحديد نقاط الضعف. إنشاء ملاحظات منظمة لكل مادة.' },
+        { title: 'المرحلة الثانية (الأسبوع 4–6)', desc: 'حل تمارين تطبيقية وتثبيت المعلومات. العمل على الأسئلة المتنوعة والتطبيق.' },
+        { title: 'المرحلة الثالثة (الأسبوع 7–8)', desc: 'امتحانات تجريبية ومراجعة شاملة. محاكاة ظروف الامتحان الحقيقي.' }
+      ]
+    },
+    intermediate: {
+      goal: 'تعزيز الفهم والتفوق الأكاديمي خلال 6 أسابيع.',
+      phases: [
+        { title: 'المرحلة الأولى (الأسبوع 1–2)', desc: 'تحديد الثغرات ومراجعة النقاط الصعبة. التركيز على المفاهيم التي تحتاج إلى تعزيز.' },
+        { title: 'المرحلة الثانية (الأسبوع 3–4)', desc: 'تمارين متقدمة وحل مسائل سابقة. تعلّم استراتيجيات حل المسائل المعقدة.' },
+        { title: 'المرحلة الثالثة (الأسبوع 5–6)', desc: 'محاكاة امتحانات وتحسين السرعة والدقة. بناء الثقة بالنفس وإدارة الوقت.' }
+      ]
+    },
+    advanced: {
+      goal: 'التميّز والحصول على أعلى الدرجات خلال 4 أسابيع.',
+      phases: [
+        { title: 'المرحلة الأولى (الأسبوع 1–2)', desc: 'التركيز على المسائل المعقدة والاستثنائية. إتقان أصعب المفاهيم والتحديات.' },
+        { title: 'المرحلة الثانية (الأسبوع 3–4)', desc: 'مراجعة شاملة + استراتيجيات الامتحان المتقدمة. تطوير أسلوب الإجابة المثالي.' }
+      ]
+    }
+  },
+  programming: {
+    beginner: {
+      goal: 'فهم أساسيات البرمجة وكتابة أول برنامج خلال 10 أسابيع.',
+      phases: [
+        { title: 'المرحلة الأولى (الأسبوع 1–3)', desc: 'فهم المنطق البرمجي وتعلم لغة Python الأساسية. متغيرات، شروط، حلقات تكرار.' },
+        { title: 'المرحلة الثانية (الأسبوع 4–7)', desc: 'بناء مشاريع صغيرة وحل تحديات برمجية. حل 30+ تمرين عملي ومشاريع مبدئية.' },
+        { title: 'المرحلة الثالثة (الأسبوع 8–10)', desc: 'مشروع شخصي كامل ونشره. بناء معرض أعمال مبدئي على GitHub.' }
+      ]
+    },
+    intermediate: {
+      goal: 'التخصص في مجال برمجي محدد خلال 8 أسابيع.',
+      phases: [
+        { title: 'المرحلة الأولى (الأسبوع 1–3)', desc: 'اختيار التخصص (ويب، تطبيقات، بيانات) وتعلم الأدوات المناسبة. إتقان الإطارات الأساسية.' },
+        { title: 'المرحلة الثانية (الأسبوع 4–6)', desc: 'مشاريع تطبيقية متوسطة التعقيد. بناء 2-3 مشاريع كاملة قابلة للنشر.' },
+        { title: 'المرحلة الثالثة (الأسبوع 7–8)', desc: 'مشروع احترافي + بناء معرض أعمال. التحضير لسوق العمل أو العمل الحر.' }
+      ]
+    },
+    advanced: {
+      goal: 'الاحتراف والمساهمة في مشاريع مفتوحة المصدر خلال 6 أسابيع.',
+      phases: [
+        { title: 'المرحلة الأولى (الأسبوع 1–2)', desc: 'تعلم تقنيات متقدمة وأنماط التصميم. Clean Code، SOLID، Design Patterns.' },
+        { title: 'المرحلة الثانية (الأسبوع 3–4)', desc: 'المساهمة في مشاريع GitHub مفتوحة المصدر. بناء سمعة في مجتمع المطورين.' },
+        { title: 'المرحلة الثالثة (الأسبوع 5–6)', desc: 'بناء مشروع معقد أو أداة مفيدة للمجتمع. نشره وتسويقه في المجتمع التقني.' }
+      ]
+    }
+  },
+  writing: {
+    beginner: {
+      goal: 'اكتساب أساسيات الكتابة الجيدة خلال 8 أسابيع.',
+      phases: [
+        { title: 'المرحلة الأولى', desc: 'قراءة يومية + تحليل أساليب الكتابة. فهم بنية النصوص والفقرات الجيدة.' },
+        { title: 'المرحلة الثانية', desc: 'تمارين كتابة يومية (فقرة، مقال قصير). كتابة موضوعات متنوعة وطلب التغذية الراجعة.' },
+        { title: 'المرحلة الثالثة', desc: 'كتابة مقالات كاملة + مراجعة وتحسين. نشر أول كتاباتك وبناء ثقتك بنفسك.' }
+      ]
+    },
+    intermediate: {
+      goal: 'تحسين أسلوبك وتطوير صوتك الكتابي خلال 6 أسابيع.',
+      phases: [
+        { title: 'المرحلة الأولى', desc: 'قراءة متعمقة + تحليل الأساليب المتقدمة. دراسة كتّاب ناجحين ونقد أعمالهم.' },
+        { title: 'المرحلة الثانية', desc: 'كتابة يومية منتظمة مع التركيز على الأسلوب والوضوح. التجربة بأنواع مختلفة من الكتابة.' },
+        { title: 'المرحلة الثالثة', desc: 'كتابة مقالات احترافية + نشرها على منصات عامة. بناء جمهور قراء وتلقي النقد البنّاء.' }
+      ]
+    },
+    advanced: {
+      goal: 'الوصول للاحتراف وبناء هوية كتابية مميزة خلال 4 أسابيع.',
+      phases: [
+        { title: 'المرحلة الأولى', desc: 'تعمق في فنون الأساليب الراقية والكتابة المتخصصة. دراسة الأدب والفلسفة والنقد.' },
+        { title: 'المرحلة الثانية', desc: 'إنتاج محتوى متقدم ومتنوع مع مراجعة متخصصين. بناء محفظة أعمال احترافية.' },
+        { title: 'المرحلة الثالثة', desc: 'النشر الاحترافي وبناء جمهور وعلامة شخصية. التحضير للنشر في مجلات أو منصات موثوقة.' }
+      ]
+    }
+  },
+  culture: {
+    beginner: {
+      goal: 'بناء قاعدة معرفية متنوعة وفضول فكري متقد خلال 10 أسابيع.',
+      phases: [
+        { title: 'المرحلة الأولى', desc: 'استكشاف مجالات متنوعة: تاريخ، علوم، فلسفة، جغرافيا. قراءة مقدمات في كل مجال.' },
+        { title: 'المرحلة الثانية', desc: 'التعمق في 2-3 مجالات مفضلة. قراءة كتب مبسطة وملخصات موثوقة.' },
+        { title: 'المرحلة الثالثة', desc: 'إنتاج ملخصات ومشاركة المعرفة مع الآخرين. كتابة مراجعات وتلخيص ما تعلمته.' }
+      ]
+    },
+    intermediate: {
+      goal: 'توسيع الآفاق وبناء شبكة معرفية متكاملة خلال 8 أسابيع.',
+      phases: [
+        { title: 'المرحلة الأولى', desc: 'قراءة كتب في مجالات متعددة + متابعة محاضرات TED. التنويع في المصادر والوجهات.' },
+        { title: 'المرحلة الثانية', desc: 'التعمق في المجالات المفضلة وربطها ببعضها. تكوين رأي شخصي ومنهج تفكير نقدي.' },
+        { title: 'المرحلة الثالثة', desc: 'إنتاج محتوى تثقيفي ومشاركة المعرفة مع مجتمعك. كتابة مقالات أو إنشاء محتوى.' }
+      ]
+    },
+    advanced: {
+      goal: 'التخصص والتميز الفكري وإثراء المجتمع بمعرفتك خلال 6 أسابيع.',
+      phases: [
+        { title: 'المرحلة الأولى', desc: 'قراءة أعمال متخصصة وكلاسيكية في مجالات الاهتمام. بناء مكتبة فكرية راقية.' },
+        { title: 'المرحلة الثانية', desc: 'النقاش الفكري والتحليل العميق. كتابة مقالات تحليلية ومقارنة وجهات النظر.' },
+        { title: 'المرحلة الثالثة', desc: 'إنتاج محتوى تثقيفي ومساهمة في النقاشات الفكرية. بناء حضور فكري في المجتمع.' }
+      ]
+    }
+  }
+};
+
+// ===================== DATA: TOOLS =====================
+// Each tool has: name, emoji, func, why, link, specifics[]
+// specifics = [{ label, url, desc }] — precise sub-resources inside each tool
+
+const toolsData = {
+  language: {
+    video: [
+      {
+        name: 'YouTube', emoji: '▶️', func: 'قنوات تعليمية لغوية مختارة', why: 'مجاني + محتوى هائل مخصص لكل لغة ومستوى', link: 'https://www.youtube.com',
+        specifics: [
+          { label: 'Learn English with EnglishClass101', url: 'https://www.youtube.com/@EnglishClass101', desc: 'مثالي للمبتدئين في الإنجليزية' },
+          { label: 'Français avec Pierre', url: 'https://www.youtube.com/@francaisavecpierre', desc: 'تعلم الفرنسية بأسلوب ممتع وطبيعي' },
+          { label: 'Learn French with Alexa', url: 'https://www.youtube.com/@learnfrenchwithalexa', desc: 'دروس فرنسية منهجية من المبتدئ للمتقدم' },
+          { label: 'Arabic with Sam', url: 'https://www.youtube.com/@ArabicWithSam', desc: 'تعلم العربية الفصحى بطريقة مبسطة' }
+        ]
+      },
+      {
+        name: 'BBC Learning English', emoji: '🇬🇧', func: 'دروس إنجليزية احترافية ومجانية', why: 'محتوى أصيل بمستويات متعددة من أشهر هيئة بريطانية', link: 'https://www.bbc.co.uk/learningenglish',
+        specifics: [
+          { label: 'The English We Speak', url: 'https://www.bbc.co.uk/learningenglish/english/features/the-english-we-speak', desc: 'تعبيرات يومية مع السياق الحقيقي' },
+          { label: '6 Minute English', url: 'https://www.bbc.co.uk/learningenglish/english/features/6-minute-english', desc: 'حلقات قصيرة عن مواضيع متنوعة' },
+          { label: 'Grammar', url: 'https://www.bbc.co.uk/learningenglish/english/course/english-you-need/unit-1/session-1', desc: 'دروس قواعد منظمة ومجانية' }
+        ]
+      },
+      {
+        name: 'TV5Monde', emoji: '🇫🇷', func: 'تمارين وفيديوهات بالفرنسية الأصيلة', why: 'محتوى فرنسي حقيقي بمستويات A1 إلى C2', link: 'https://apprendre.tv5monde.com',
+        specifics: [
+          { label: 'Langue française — A1/A2', url: 'https://apprendre.tv5monde.com/fr/langue-francaise', desc: 'ابدأ من المستوى الأول بتمارين تفاعلية' },
+          { label: 'Parler français au quotidien', url: 'https://apprendre.tv5monde.com/fr/fle', desc: 'الفرنسية في الحياة اليومية' }
+        ]
+      },
+      {
+        name: 'Duolingo', emoji: '🦉', func: 'دروس يومية لغوية بشكل لعبة', why: 'مثالي للاستمرارية اليومية — يحفزك بالنقاط والتحديات', link: 'https://www.duolingo.com',
+        specifics: [
+          { label: 'مسار الإنجليزية', url: 'https://www.duolingo.com/course/en/ar/Learn-English', desc: 'من الصفر مع 5 دقائق يومياً' },
+          { label: 'مسار الفرنسية', url: 'https://www.duolingo.com/course/fr/ar/Learn-French', desc: 'تعلم الفرنسية بأسلوب ممتع' }
+        ]
+      },
+      {
+        name: 'Tandem', emoji: '💬', func: 'محادثة مع ناطقين أصليين', why: 'تدرب مع بشر حقيقيين وتلقَّ تصحيحاً فورياً', link: 'https://www.tandem.net',
+        specifics: [
+          { label: 'ابحث عن شريك لغة', url: 'https://www.tandem.net/language-exchange', desc: 'مطابقة ذكية مع شريك يتعلم لغتك' },
+          { label: 'تعلم الإنجليزية مجاناً', url: 'https://www.tandem.net/learn-english', desc: 'آلاف الناطقين الأصليين بالإنجليزية' }
+        ]
+      }
+    ],
+    text: [
+      {
+        name: 'LingQ', emoji: '📝', func: 'قراءة نصوص متدرجة مع ترجمة فورية', why: 'اغمر نفسك في نصوص حقيقية مع أدوات ذكية للتعلم', link: 'https://www.lingq.com',
+        specifics: [
+          { label: 'Mini Stories for Beginners', url: 'https://www.lingq.com/en/learn/ar/web/', desc: 'قصص قصيرة مصممة للمبتدئين' },
+          { label: 'مكتبة الفرنسية', url: 'https://www.lingq.com/en/learn/fr/web/', desc: 'آلاف النصوص الفرنسية بمستويات مختلفة' }
+        ]
+      },
+      {
+        name: 'Anki', emoji: '🃏', func: 'بطاقات ذكية بالتكرار المتباعد', why: 'النظام العلمي الأمثل لتثبيت المفردات في الذاكرة طويلة المدى', link: 'https://apps.ankiweb.net',
+        specifics: [
+          { label: 'حزمة: أكثر 2000 كلمة إنجليزية شيوعاً', url: 'https://ankiweb.net/shared/info/1898294983', desc: 'تحميل مجاني — أساس أي متعلم' },
+          { label: 'حزمة: 1000 كلمة فرنسية شائعة', url: 'https://ankiweb.net/shared/info/893324022', desc: 'البداية الصحيحة لتعلم الفرنسية' }
+        ]
+      },
+      {
+        name: 'Busuu', emoji: '🌿', func: 'دورات لغوية كاملة مع تصحيح بشري', why: 'ميزة التصحيح من ناطقين أصليين تصنع فارقاً حقيقياً', link: 'https://www.busuu.com',
+        specifics: [
+          { label: 'دورة الإنجليزية (A1–B2)', url: 'https://www.busuu.com/dashboard#learn/en', desc: 'منهج منظم مع شهادة معترف بها' },
+          { label: 'دورة الفرنسية', url: 'https://www.busuu.com/dashboard#learn/fr', desc: 'من المبتدئ إلى المتوسط بشكل سلس' }
+        ]
+      },
+      {
+        name: 'Madrasa', emoji: '🕌', func: 'منصة عربية لتعلم اللغة العربية', why: 'أفضل منصة مجانية متخصصة في العربية للناطقين بغيرها', link: 'https://madrasa.org',
+        specifics: [
+          { label: 'دروس النحو', url: 'https://madrasa.org/courses/', desc: 'أساسيات النحو العربي بأسلوب بسيط' },
+          { label: 'تعلم قراءة القرآن', url: 'https://madrasa.org/', desc: 'تجويد وقراءة صحيحة للمبتدئين' }
+        ]
+      },
+      {
+        name: 'ChatGPT', emoji: '🤖', func: 'مساعد لغوي شخصي متاح 24/7', why: 'يصحح كتابتك، يشرح القواعد، ويمارس معك المحادثة بأي لغة', link: 'https://chat.openai.com',
+        specifics: [
+          { label: 'جرّب: "صحّح جملتي بالإنجليزية واشرح الخطأ"', url: 'https://chat.openai.com', desc: 'تصحيح فوري مع شرح سبب الخطأ' },
+          { label: 'جرّب: "تحدث معي بالفرنسية كمبتدئ"', url: 'https://chat.openai.com', desc: 'محادثة تكيّفية حسب مستواك' }
+        ]
+      }
+    ],
+    interactive: [
+      {
+        name: 'Duolingo', emoji: '🦉', func: 'تمارين تفاعلية يومية بأسلوب الألعاب', why: 'الاستمرارية المضمونة بفضل نظام النقاط والمكافآت اليومية', link: 'https://www.duolingo.com',
+        specifics: [
+          { label: 'Stories (قصص تفاعلية)', url: 'https://www.duolingo.com/stories', desc: 'قصص حوارية تفاعلية لفهم السياق' },
+          { label: 'Duolingo for Schools', url: 'https://schools.duolingo.com', desc: 'متابعة تقدمك بشكل منظم' }
+        ]
+      },
+      {
+        name: 'Busuu', emoji: '🌿', func: 'دروس تفاعلية مع تصحيح مجتمعي', why: 'تكتب وتتحدث ويصحح لك ناطقون أصليون مجاناً', link: 'https://www.busuu.com',
+        specifics: [
+          { label: 'ميزة Speaking Practice', url: 'https://www.busuu.com/', desc: 'سجّل صوتك واحصل على تقييم فوري' },
+          { label: 'Grammar Practice', url: 'https://www.busuu.com/', desc: 'تمارين قواعد تفاعلية مع تصحيح ذكي' }
+        ]
+      },
+      {
+        name: 'Anki', emoji: '🃏', func: 'نظام التكرار المتباعد التفاعلي', why: 'خوارزمية علمية تحدد متى تراجع كل بطاقة بالضبط', link: 'https://apps.ankiweb.net',
+        specifics: [
+          { label: 'AnkiWeb (نسخة مجانية على الإنترنت)', url: 'https://ankiweb.net', desc: 'استخدم Anki مباشرة في المتصفح' },
+          { label: 'تحميل Anki Desktop', url: 'https://apps.ankiweb.net/', desc: 'النسخة الكاملة المجانية للكمبيوتر' }
+        ]
+      },
+      {
+        name: 'Tandem', emoji: '💬', func: 'محادثة تفاعلية مع ناطقين أصليين', why: 'التعلم بالتفاعل البشري الحقيقي لا يُعوَّض', link: 'https://www.tandem.net',
+        specifics: [
+          { label: 'Tandem Tutors (معلمون معتمدون)', url: 'https://www.tandem.net/online-tutors', desc: 'دروس خاصة مع معلمين محترفين' },
+          { label: 'Language Exchange Community', url: 'https://www.tandem.net/language-exchange', desc: 'تبادل لغوي مجاني مع أشخاص من كل العالم' }
+        ]
+      },
+      {
+        name: 'ChatGPT', emoji: '🤖', func: 'شريك محادثة ذكي لممارسة اللغة', why: 'يتكيف مع مستواك ويصحح أخطاءك في الحال', link: 'https://chat.openai.com',
+        specifics: [
+          { label: 'ممارسة الحوار اليومي', url: 'https://chat.openai.com', desc: 'قل: "Let\'s practice English conversation at beginner level"' },
+          { label: 'اختبار المفردات', url: 'https://chat.openai.com', desc: 'قل: "Quiz me on 10 French vocabulary words"' }
+        ]
+      }
+    ],
+    mixed: [
+      {
+        name: 'Duolingo', emoji: '🦉', func: 'مزيج ممتع من الاستماع والكتابة والتحدث', why: 'يجمع أساليب تعلم متعددة في 10 دقائق يومياً', link: 'https://www.duolingo.com',
+        specifics: [
+          { label: 'Duolingo Podcast', url: 'https://podcast.duolingo.com', desc: 'قصص مثيرة للاستماع بالإنجليزية والإسبانية والفرنسية' },
+          { label: 'Duolingo Stories', url: 'https://www.duolingo.com/stories', desc: 'قصص قراءة واستماع تفاعلية' }
+        ]
+      },
+      {
+        name: 'Anki', emoji: '🃏', func: 'بطاقات ذكية لتثبيت ما تتعلمه', why: 'أضف المفردات التي تعلمتها اليوم وراجعها غداً آلياً', link: 'https://apps.ankiweb.net',
+        specifics: [
+          { label: 'AnkiWeb (مجاني على الإنترنت)', url: 'https://ankiweb.net', desc: 'لا تحتاج تثبيت — ابدأ فوراً' },
+          { label: 'Shared Decks — Language', url: 'https://ankiweb.net/shared/decks/language', desc: 'آلاف الحزم الجاهزة لكل اللغات' }
+        ]
+      },
+      {
+        name: 'YouTube', emoji: '▶️', func: 'قنوات لغوية مختارة لمستواك', why: 'استمع وشاهد محتوى حقيقياً باللغة المستهدفة', link: 'https://www.youtube.com',
+        specifics: [
+          { label: 'Comprehensible Input (Dreaming Spanish)', url: 'https://www.youtube.com/@DreamingSpanish', desc: 'مثال على أسلوب التعلم بالاستماع الكثيف' },
+          { label: 'English with Lucy', url: 'https://www.youtube.com/@EnglishwithLucy', desc: '17M مشترك — واحدة من أفضل قنوات الإنجليزية' },
+          { label: 'innerFrench', url: 'https://www.youtube.com/@innerFrench', desc: 'فرنسية بطيئة ومفهومة للمستوى المتوسط' }
+        ]
+      },
+      {
+        name: 'Tandem', emoji: '💬', func: 'ممارسة المحادثة مع بشر حقيقيين', why: 'لا يوجد تعلم حقيقي بدون ممارسة مع ناطقين أصليين', link: 'https://www.tandem.net',
+        specifics: [
+          { label: 'ابحث عن شريك لغوي', url: 'https://www.tandem.net/language-exchange', desc: 'مطابقة بناءً على اهتماماتك المشتركة' }
+        ]
+      },
+      {
+        name: 'ChatGPT', emoji: '🤖', func: 'معلم لغوي شخصي ذكي', why: 'القاموس، المصحح، المحاور — كل شيء في مكان واحد', link: 'https://chat.openai.com',
+        specifics: [
+          { label: 'اطلب خطة مفردات أسبوعية', url: 'https://chat.openai.com', desc: 'مثال: "Give me 20 English words related to travel with examples"' },
+          { label: 'صحّح كتابتك', url: 'https://chat.openai.com', desc: 'مثال: "Correct my French text and explain each mistake"' }
+        ]
+      }
+    ]
+  },
+
+  revision: {
+    video: [
+      {
+        name: 'Khan Academy', emoji: '📺', func: 'شروحات فيديو منهجية لكل المواد', why: 'مجاني 100% + تمارين تكيفية ذكية بعد كل درس', link: 'https://www.khanacademy.org',
+        specifics: [
+          { label: 'الرياضيات (من الابتدائي للجامعة)', url: 'https://www.khanacademy.org/math', desc: 'آلاف التمارين مع شروحات خطوة بخطوة' },
+          { label: 'العلوم والبيولوجيا والكيمياء', url: 'https://www.khanacademy.org/science', desc: 'شروحات بصرية مذهلة للمفاهيم الصعبة' },
+          { label: 'الفيزياء والكيمياء للثانوية', url: 'https://www.khanacademy.org/science/physics', desc: 'يغطي منهج البكالوريا الدولية' }
+        ]
+      },
+      {
+        name: 'YouTube — قنوات مختارة', emoji: '▶️', func: 'قنوات شرح عربية وفرنسية متخصصة', why: 'معلمون يشرحون بالعربية الدارجة والفصحى والفرنسية', link: 'https://www.youtube.com',
+        specifics: [
+          { label: 'قناة أيمن علي (رياضيات)', url: 'https://www.youtube.com/@DrAymanAli', desc: 'شرح ممتاز للرياضيات بالعربية' },
+          { label: 'Yac Maths (بالفرنسية)', url: 'https://www.youtube.com/@yacmaths', desc: 'رياضيات الثانوية والبكالوريا بالفرنسية' },
+          { label: 'Physique Chimie (Bac)', url: 'https://www.youtube.com/@PhysiqueChimieBac', desc: 'فيزياء وكيمياء للثانوي بالفرنسية' },
+          { label: 'Maths faciles', url: 'https://www.youtube.com/@mathsfaciles', desc: 'تبسيط الرياضيات للثانوية' }
+        ]
+      },
+      {
+        name: 'Coursera', emoji: '🎓', func: 'دورات أكاديمية من جامعات عالمية', why: 'شهادات معترف بها + محتوى من هارفارد وMIT', link: 'https://www.coursera.org',
+        specifics: [
+          { label: 'Learning How to Learn (أشهر دورة)', url: 'https://www.coursera.org/learn/learning-how-to-learn', desc: 'تعلّم كيف تتعلم — علم الأعصاب والذاكرة' },
+          { label: 'Mathematics for Machine Learning', url: 'https://www.coursera.org/specializations/mathematics-machine-learning', desc: 'للمستوى المتقدم في الرياضيات' }
+        ]
+      },
+      {
+        name: 'Quizlet', emoji: '📋', func: 'بطاقات مراجعة تفاعلية', why: 'حوّل ملاحظاتك إلى اختبارات ذاتية في دقيقتين', link: 'https://quizlet.com',
+        specifics: [
+          { label: 'اختبارات Bac الجاهزة', url: 'https://quizlet.com/subject/bac/', desc: 'آلاف الحزم المجانية للبكالوريا' },
+          { label: 'وضع المطابقة (Match)', url: 'https://quizlet.com/', desc: 'ألعاب تعليمية تجعل المراجعة ممتعة' }
+        ]
+      },
+      {
+        name: 'ChatGPT', emoji: '🤖', func: 'معلم خاص يشرح أي مفهوم فوراً', why: 'اشرح لي كأنني في الصف السادس — يبسّط أصعب المفاهيم', link: 'https://chat.openai.com',
+        specifics: [
+          { label: 'اطلب شرحاً مبسطاً', url: 'https://chat.openai.com', desc: 'مثال: "اشرح لي التفاضل والتكامل بأسلوب بسيط مع أمثلة"' },
+          { label: 'طلب امتحان تجريبي', url: 'https://chat.openai.com', desc: 'مثال: "أعطني 10 أسئلة في الفيزياء مستوى ثانوي"' }
+        ]
+      }
+    ],
+    text: [
+      {
+        name: 'Notion', emoji: '📓', func: 'تنظيم ملاحظاتك بطريقة ذكية ومرنة', why: 'أداة واحدة تجمع ملاحظاتك وجداولك وخططك', link: 'https://www.notion.so',
+        specifics: [
+          { label: 'قالب مراجعة الدراسة (Student Template)', url: 'https://www.notion.so/templates/student', desc: 'قوالب جاهزة خصيصاً للطلاب — مجانية' },
+          { label: 'Cornell Notes Template', url: 'https://www.notion.so/templates/cornell-notes', desc: 'نظام المذكرات العلمي المثبت فاعليته' }
+        ]
+      },
+      {
+        name: 'Anki', emoji: '🃏', func: 'حفظ علمي بالتكرار المتباعد', why: 'يضمن لك تذكّر 90% مما تدرسه على المدى البعيد', link: 'https://apps.ankiweb.net',
+        specifics: [
+          { label: 'Biology Bac Flashcards', url: 'https://ankiweb.net/shared/info/1360429669', desc: 'بيولوجيا الثانوية — حزمة جاهزة' },
+          { label: 'Chemistry Essentials', url: 'https://ankiweb.net/shared/info/1790425521', desc: 'كيمياء أساسية للثانوي والجامعة' }
+        ]
+      },
+      {
+        name: 'Quizlet', emoji: '📋', func: 'بطاقات مراجعة مع مجموعات جاهزة', why: 'ملايين الحزم الجاهزة لكل مادة وكل مستوى', link: 'https://quizlet.com',
+        specifics: [
+          { label: 'ابحث عن مادتك', url: 'https://quizlet.com/subject/study/', desc: 'أدخل اسم المادة وجد حزمة جاهزة' },
+          { label: 'Quizlet Live (للمجموعات)', url: 'https://quizlet.com/features/live', desc: 'مراجعة جماعية ممتعة مع الأصدقاء' }
+        ]
+      },
+      {
+        name: 'Khan Academy', emoji: '📺', func: 'موارد نصية وتمارين منهجية', why: 'مرجع موثوق يتدرج من السهل للصعب تلقائياً', link: 'https://www.khanacademy.org',
+        specifics: [
+          { label: 'قسم الرياضيات', url: 'https://www.khanacademy.org/math', desc: 'من الأعداد الأساسية إلى حساب التفاضل' },
+          { label: 'SAT Prep (مجاني)', url: 'https://www.khanacademy.org/sat', desc: 'تحضير شامل للامتحانات الدولية' }
+        ]
+      },
+      {
+        name: 'ChatGPT', emoji: '🤖', func: 'مذاكرة حوارية فعّالة', why: 'مدرّس خاص يتكيّف مع أسئلتك في أي وقت', link: 'https://chat.openai.com',
+        specifics: [
+          { label: 'اطلب ملخصاً للدرس', url: 'https://chat.openai.com', desc: 'مثال: "لخّص لي درس التحليل الخلوي في 10 نقاط"' },
+          { label: 'اختبار سؤال-جواب', url: 'https://chat.openai.com', desc: 'مثال: "اختبرني في مادة التاريخ — الثورة الفرنسية"' }
+        ]
+      }
+    ],
+    interactive: [
+      {
+        name: 'Quizlet', emoji: '📋', func: 'اختبارات تفاعلية متنوعة الأساليب', why: 'أكثر من 6 أوضاع مراجعة مختلفة لكل أنواع المتعلمين', link: 'https://quizlet.com',
+        specifics: [
+          { label: 'وضع Learn (التعلم الذكي)', url: 'https://quizlet.com/', desc: 'خوارزمية تكيفية تركز على نقاط ضعفك' },
+          { label: 'وضع Test (امتحان تجريبي)', url: 'https://quizlet.com/', desc: 'اختبار نفسك كأنك في الامتحان الحقيقي' },
+          { label: 'Quizlet Live (مع الفريق)', url: 'https://quizlet.com/features/live', desc: 'منافسة ممتعة بين الطلاب في الوقت الفعلي' }
+        ]
+      },
+      {
+        name: 'Khan Academy', emoji: '📺', func: 'تمارين تفاعلية مع تصحيح فوري', why: 'يعطيك تلميحات تدريجية بدل إعطاء الجواب مباشرة', link: 'https://www.khanacademy.org',
+        specifics: [
+          { label: 'Math Practice Engine', url: 'https://www.khanacademy.org/math', desc: 'آلاف التمارين مع تصحيح فوري وإحصاءات' },
+          { label: 'Mastery System', url: 'https://www.khanacademy.org/', desc: 'نظام إتقان يتتبع تقدمك تلقائياً' }
+        ]
+      },
+      {
+        name: 'GeoGebra', emoji: '📐', func: 'رياضيات وعلوم تفاعلية بصرياً', why: 'أرى الرياضيات بدل حفظها — مثالي لفهم الهندسة والتحليل', link: 'https://www.geogebra.org',
+        specifics: [
+          { label: 'Graphing Calculator', url: 'https://www.geogebra.org/graphing', desc: 'ارسم أي دالة وتفاعل معها مباشرة' },
+          { label: 'Geometry (هندسة تفاعلية)', url: 'https://www.geogebra.org/geometry', desc: 'ارسم وقس الأشكال الهندسية بدقة' },
+          { label: 'GeoGebra Classroom', url: 'https://www.geogebra.org/classroom', desc: 'للمذاكرة الجماعية مع الأستاذ' }
+        ]
+      },
+      {
+        name: 'Anki', emoji: '🃏', func: 'تكرار ذكي وتفاعلي للمراجعة', why: 'يحدد تلقائياً ما تحتاج مراجعته اليوم بالضبط', link: 'https://apps.ankiweb.net',
+        specifics: [
+          { label: 'إنشاء بطاقات من ملاحظاتك', url: 'https://apps.ankiweb.net/', desc: 'حوّل دروسك إلى بطاقات في دقائق' },
+          { label: 'Image Occlusion (إخفاء الصور)', url: 'https://ankiweb.net/shared/info/1374772155', desc: 'إخفاء أجزاء من صور التشريح والخرائط' }
+        ]
+      },
+      {
+        name: 'ChatGPT', emoji: '🤖', func: 'مراجعة تفاعلية بالحوار', why: 'يطرح أسئلة، يصحح إجاباتك، ويشرح أخطاءك في لحظة', link: 'https://chat.openai.com',
+        specifics: [
+          { label: 'طريقة الفلاشكارد الصوتية', url: 'https://chat.openai.com', desc: 'مثال: "اسألني عن درس التفاعلات الكيميائية وصحح إجاباتي"' },
+          { label: 'محاكاة امتحان شفهي', url: 'https://chat.openai.com', desc: 'مثال: "كن أستاذاً وأجرِ معي امتحاناً شفهياً في التاريخ"' }
+        ]
+      }
+    ],
+    mixed: [
+      {
+        name: 'Khan Academy', emoji: '📺', func: 'فيديوهات + ملاحظات + تمارين منهجية', why: 'النظام الأكثر اكتمالاً للمراجعة المجانية', link: 'https://www.khanacademy.org',
+        specifics: [
+          { label: 'لوحة تحكم الطالب', url: 'https://www.khanacademy.org/', desc: 'تتبع تقدمك في كل مادة بصرياً' },
+          { label: 'Math + Science + History', url: 'https://www.khanacademy.org/subjects', desc: 'كل المواد في مكان واحد ومجاناً' }
+        ]
+      },
+      {
+        name: 'Quizlet', emoji: '📋', func: 'مراجعة متعددة الأساليب', why: 'ادرس + راجع + اختبر نفسك في أداة واحدة', link: 'https://quizlet.com',
+        specifics: [
+          { label: 'Flashcards + Learn + Test', url: 'https://quizlet.com/', desc: 'ثلاثة أساليب مراجعة في خطوات متتالية' },
+          { label: 'Quizlet AI (مساعد ذكي)', url: 'https://quizlet.com/features/q-chat', desc: 'مساعد ذكاء اصطناعي مخصص للمراجعة' }
+        ]
+      },
+      {
+        name: 'Notion', emoji: '📓', func: 'تنظيم كل موادك في مساحة واحدة', why: 'اصنع لوحة تحكم دراسية شاملة وجميلة', link: 'https://www.notion.so',
+        specifics: [
+          { label: 'Study Planner Template', url: 'https://www.notion.so/templates/student', desc: 'خطط لجلسات مراجعتك أسبوعياً' },
+          { label: 'Subject Tracker', url: 'https://www.notion.so/templates', desc: 'تتبع تقدمك في كل مادة بشكل بصري' }
+        ]
+      },
+      {
+        name: 'Anki', emoji: '🃏', func: 'تثبيت المعلومات في الذاكرة طويلة المدى', why: 'أفضل طريقة علمية مُثبتة لمكافحة النسيان', link: 'https://apps.ankiweb.net',
+        specifics: [
+          { label: 'AnkiWeb (مجاني على الإنترنت)', url: 'https://ankiweb.net', desc: 'ابدأ بدون تثبيت — من المتصفح مباشرة' },
+          { label: 'Shared Decks للمراجعة', url: 'https://ankiweb.net/shared/decks/', desc: 'آلاف الحزم الجاهزة للعلوم والرياضيات' }
+        ]
+      },
+      {
+        name: 'ChatGPT', emoji: '🤖', func: 'مدرّس خاص وشريك مراجعة ذكي', why: 'يشرح، يختبر، ويبسّط — في أي وقت وبأي لغة', link: 'https://chat.openai.com',
+        specifics: [
+          { label: 'ملخص الدرس فوراً', url: 'https://chat.openai.com', desc: 'مثال: "لخص لي الفصل الثالث من الكيمياء العضوية"' },
+          { label: 'خطة مراجعة مخصصة', url: 'https://chat.openai.com', desc: 'مثال: "امتحاني بعد 3 أسابيع — ساعدني في وضع خطة"' }
+        ]
+      }
+    ]
+  },
+
+  programming: {
+    video: [
+      {
+        name: 'YouTube — قنوات برمجية مختارة', emoji: '▶️', func: 'أفضل القنوات لتعلم البرمجة مجاناً', why: 'مئات المطورين المحترفين يشاركون خبرتهم مجاناً', link: 'https://www.youtube.com',
+        specifics: [
+          { label: 'Traversy Media (ويب وجافاسكريبت)', url: 'https://www.youtube.com/@TraversyMedia', desc: 'أفضل قناة لتعلم تطوير الويب بالإنجليزية' },
+          { label: 'Bro Code (Python & Java للمبتدئين)', url: 'https://www.youtube.com/@BroCodez', desc: 'شرح ممتع ومبسط لعدة لغات برمجة' },
+          { label: 'Fireship (مفاهيم سريعة)', url: 'https://www.youtube.com/@Fireship', desc: 'شرح مفاهيم في 100 ثانية — للمبتدئ والمحترف' },
+          { label: 'The Coding Train', url: 'https://www.youtube.com/@TheCodingTrain', desc: 'مشاريع إبداعية بالبرمجة — ممتع جداً' },
+          { label: 'Programiz (بالعربية والإنجليزية)', url: 'https://www.youtube.com/@programiz', desc: 'Python وC++ وJava للمبتدئين' }
+        ]
+      },
+      {
+        name: 'freeCodeCamp', emoji: '🆓', func: 'منهج متكامل مجاني مع شهادات معترف بها', why: 'آلاف ساعات المحتوى + مشاريع حقيقية + شهادة مجانية', link: 'https://www.freecodecamp.org',
+        specifics: [
+          { label: 'Responsive Web Design (HTML/CSS)', url: 'https://www.freecodecamp.org/learn/2022/responsive-web-design/', desc: 'ابدأ بالويب — شهادة مجانية عند الإتمام' },
+          { label: 'JavaScript Algorithms', url: 'https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/', desc: 'من المتغيرات إلى الخوارزميات المعقدة' },
+          { label: 'Python for Everybody', url: 'https://www.freecodecamp.org/learn/scientific-computing-with-python/', desc: 'Python للعلوم والحوسبة — مجاناً' }
+        ]
+      },
+      {
+        name: 'Codecademy', emoji: '💡', func: 'دروس تفاعلية تكتب فيها الكود مباشرة', why: 'لا تحتاج إعداد بيئة — ابدأ الكتابة فوراً في المتصفح', link: 'https://www.codecademy.com',
+        specifics: [
+          { label: 'Learn Python 3', url: 'https://www.codecademy.com/learn/learn-python-3', desc: 'أفضل مسار لتعلم Python للمبتدئين' },
+          { label: 'Learn HTML & CSS', url: 'https://www.codecademy.com/learn/learn-html', desc: 'بناء أول موقع ويب خطوة بخطوة' },
+          { label: 'Learn SQL', url: 'https://www.codecademy.com/learn/learn-sql', desc: 'قواعد البيانات — مهارة أساسية' }
+        ]
+      },
+      {
+        name: 'Replit', emoji: '☁️', func: 'بيئة برمجة سحابية — ابدأ فوراً', why: 'لا تثبيت، لا إعداد — ابدأ الكتابة من المتصفح في 30 ثانية', link: 'https://replit.com',
+        specifics: [
+          { label: '100 Days of Code (Python)', url: 'https://replit.com/learn/100-days-of-python', desc: 'تحدي Python اليومي لـ100 يوم' },
+          { label: 'Templates جاهزة', url: 'https://replit.com/templates', desc: 'ابدأ مشروعك من قالب جاهز' }
+        ]
+      },
+      {
+        name: 'ChatGPT', emoji: '🤖', func: 'مساعد برمجي ذكي يشرح الكود ويحل الأخطاء', why: 'كأن لديك زميل خبير يجلس بجانبك دائماً', link: 'https://chat.openai.com',
+        specifics: [
+          { label: 'اشرح لي هذا الكود', url: 'https://chat.openai.com', desc: 'الصق أي كود واطلب شرحه سطراً سطراً' },
+          { label: 'ساعدني في حل هذا الخطأ', url: 'https://chat.openai.com', desc: 'الصق رسالة الخطأ والكود واحصل على الحل فوراً' }
+        ]
+      }
+    ],
+    text: [
+      {
+        name: 'MDN Web Docs', emoji: '🌐', func: 'المرجع الرسمي لتقنيات الويب', why: 'الأكثر دقة وشمولاً لـ HTML وCSS وJavaScript', link: 'https://developer.mozilla.org',
+        specifics: [
+          { label: 'HTML Reference', url: 'https://developer.mozilla.org/en-US/docs/Web/HTML', desc: 'كل وسوم HTML مع أمثلة حية' },
+          { label: 'JavaScript Guide', url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide', desc: 'دليل JavaScript الأشمل والأدق' },
+          { label: 'CSS Reference', url: 'https://developer.mozilla.org/en-US/docs/Web/CSS', desc: 'كل خصائص CSS مع نماذج بصرية' }
+        ]
+      },
+      {
+        name: 'Stack Overflow', emoji: '🔧', func: 'حل كل مشكلة برمجية في ثوانٍ', why: 'أكثر من 50 مليون إجابة — مشكلتك موجودة بالتأكيد', link: 'https://stackoverflow.com',
+        specifics: [
+          { label: 'ابحث عن رسالة الخطأ', url: 'https://stackoverflow.com/', desc: 'انسخ رسالة الخطأ مباشرة في البحث' },
+          { label: 'Python Questions', url: 'https://stackoverflow.com/questions/tagged/python', desc: 'أكثر من 2 مليون سؤال في Python' },
+          { label: 'JavaScript Questions', url: 'https://stackoverflow.com/questions/tagged/javascript', desc: 'أكثر أسئلة JavaScript إجابةً' }
+        ]
+      },
+      {
+        name: 'freeCodeCamp', emoji: '🆓', func: 'مقالات تقنية عميقة + منهج مجاني كامل', why: 'مجتمع ضخم + آلاف المقالات بالعربية والإنجليزية', link: 'https://www.freecodecamp.org',
+        specifics: [
+          { label: 'freeCodeCamp News (مقالات)', url: 'https://www.freecodecamp.org/news/', desc: 'آلاف المقالات التقنية المجانية' },
+          { label: 'Python Handbook', url: 'https://www.freecodecamp.org/news/the-python-handbook/', desc: 'دليل Python الكامل — PDF مجاني' },
+          { label: 'Git and GitHub for Beginners', url: 'https://www.freecodecamp.org/news/git-and-github-for-beginners/', desc: 'دليل كامل لاستخدام Git' }
+        ]
+      },
+      {
+        name: 'GitHub', emoji: '🐙', func: 'منصة نشر الكود والتعاون مع المطورين', why: 'معرض أعمالك الرقمي — ضروري لسوق العمل', link: 'https://github.com',
+        specifics: [
+          { label: 'GitHub Docs (توثيق كامل)', url: 'https://docs.github.com', desc: 'تعلم Git وGitHub من الصفر رسمياً' },
+          { label: 'GitHub Student Pack', url: 'https://education.github.com/pack', desc: 'أدوات مجانية للطلاب بقيمة آلاف الدولارات' },
+          { label: 'GitHub Skills', url: 'https://skills.github.com/', desc: 'تمارين تفاعلية لتعلم Git' }
+        ]
+      },
+      {
+        name: 'ChatGPT', emoji: '🤖', func: 'مرجع وشارح ومصحح كود في آنٍ واحد', why: 'سرّع تعلمك بمعلم ذكي يرد فوراً في أي وقت', link: 'https://chat.openai.com',
+        specifics: [
+          { label: 'اطلب شرح مفهوم برمجي', url: 'https://chat.openai.com', desc: 'مثال: "اشرح لي الـ OOP في Python بأمثلة بسيطة"' },
+          { label: 'احصل على كود جاهز وامفهوم', url: 'https://chat.openai.com', desc: 'مثال: "اكتب دالة Python لترتيب قائمة واشرحها"' }
+        ]
+      }
+    ],
+    interactive: [
+      {
+        name: 'Codecademy', emoji: '💡', func: 'بيئة تفاعلية — اكتب الكود مباشرة', why: 'التعلم بالممارسة الفورية — لا نظرية فقط', link: 'https://www.codecademy.com',
+        specifics: [
+          { label: 'Learn Python 3 (تفاعلي)', url: 'https://www.codecademy.com/learn/learn-python-3', desc: 'اكتب Python في المتصفح فوراً' },
+          { label: 'Build Websites from Scratch', url: 'https://www.codecademy.com/learn/paths/learn-how-to-build-websites', desc: 'مسار كامل لبناء مواقع حقيقية' },
+          { label: 'Data Science Path', url: 'https://www.codecademy.com/learn/paths/data-science', desc: 'مسار علوم البيانات من الصفر' }
+        ]
+      },
+      {
+        name: 'Replit', emoji: '☁️', func: 'ابرمج وشارك مشاريعك فوراً من المتصفح', why: 'البيئة الأسرع لتجربة الأفكار وبناء المشاريع', link: 'https://replit.com',
+        specifics: [
+          { label: 'Replit Bounties (تحديات مدفوعة)', url: 'https://replit.com/bounties', desc: 'اربح مالاً فعلياً بحل تحديات برمجية' },
+          { label: '100 Days of Code Challenge', url: 'https://replit.com/learn/100-days-of-python', desc: 'تحدٍّ يومي منظم لتعلم Python' }
+        ]
+      },
+      {
+        name: 'LeetCode', emoji: '⚔️', func: 'تحديات خوارزمية لتطوير التفكير البرمجي', why: 'الأداة الأولى للتحضير لمقابلات الشركات التقنية الكبرى', link: 'https://leetcode.com',
+        specifics: [
+          { label: 'Problems — Easy Level', url: 'https://leetcode.com/problemset/?difficulty=EASY', desc: 'ابدأ بمسائل سهلة لبناء الثقة' },
+          { label: 'Explore (مسارات تعليمية)', url: 'https://leetcode.com/explore/', desc: 'مسارات منهجية في الخوارزميات وهياكل البيانات' }
+        ]
+      },
+      {
+        name: 'freeCodeCamp', emoji: '🆓', func: 'مشاريع حقيقية + شهادات مجانية', why: 'الشهادة معترف بها من شركات عالمية — مجاناً تماماً', link: 'https://www.freecodecamp.org',
+        specifics: [
+          { label: 'Responsive Web Design Certification', url: 'https://www.freecodecamp.org/learn/2022/responsive-web-design/', desc: 'أنجز 5 مشاريع حقيقية واحصل على شهادة' },
+          { label: 'JavaScript Algorithms Certification', url: 'https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/', desc: '300 ساعة من التمارين التفاعلية' }
+        ]
+      },
+      {
+        name: 'GitHub', emoji: '🐙', func: 'نشر مشاريعك وبناء معرض أعمالك', why: 'كل مشروع تنشره هو خطوة نحو وظيفتك أو مشروعك الأول', link: 'https://github.com',
+        specifics: [
+          { label: 'GitHub Pages (نشر مجاني)', url: 'https://pages.github.com/', desc: 'انشر موقعك مجاناً من GitHub مباشرة' },
+          { label: 'Explore Open Source Projects', url: 'https://github.com/explore', desc: 'ساهم في مشاريع حقيقية واكسب خبرة' }
+        ]
+      }
+    ],
+    mixed: [
+      {
+        name: 'freeCodeCamp', emoji: '🆓', func: 'فيديوهات + تمارين + مشاريع + شهادات', why: 'أفضل منصة مجانية متكاملة لتعلم البرمجة من الصفر', link: 'https://www.freecodecamp.org',
+        specifics: [
+          { label: 'قناة YouTube (7M مشترك)', url: 'https://www.youtube.com/@freecodecamp', desc: 'دورات كاملة بالفيديو — مجاناً' },
+          { label: 'Curriculum (المنهج التفاعلي)', url: 'https://www.freecodecamp.org/learn', desc: 'اتبع مساراً منظماً خطوة بخطوة' },
+          { label: 'freeCodeCamp News', url: 'https://www.freecodecamp.org/news/', desc: 'مقالات عمقية وأدلة تقنية مجانية' }
+        ]
+      },
+      {
+        name: 'Replit', emoji: '☁️', func: 'اكتب، جرّب، وانشر من المتصفح', why: 'الأسرع للتجربة العملية — لا حاجة لإعداد بيئة تطوير', link: 'https://replit.com',
+        specifics: [
+          { label: 'Python Starter', url: 'https://replit.com/@replit/Python', desc: 'ابدأ Python في 10 ثوانٍ' },
+          { label: 'HTML/CSS/JS Template', url: 'https://replit.com/@replit/HTML-CSS-JS', desc: 'ابنِ موقعك الأول فوراً' }
+        ]
+      },
+      {
+        name: 'GitHub', emoji: '🐙', func: 'نشر كودك وبناء هويتك كمطوّر', why: 'مطلوب في كل وظيفة تقنية — يُظهر عملك الفعلي', link: 'https://github.com',
+        specifics: [
+          { label: 'GitHub Skills (تمارين تفاعلية)', url: 'https://skills.github.com/', desc: 'تعلم Git وGitHub من خلال مشاريع حقيقية' },
+          { label: 'GitHub Pages', url: 'https://pages.github.com/', desc: 'انشر موقعك أو معرض أعمالك مجاناً' }
+        ]
+      },
+      {
+        name: 'VS Code', emoji: '💻', func: 'محرر أكواد احترافي — الأكثر استخداماً', why: 'يستخدمه 73% من المطورين في العالم — إضافات لا حصر لها', link: 'https://code.visualstudio.com',
+        specifics: [
+          { label: 'VS Code Introductory Videos', url: 'https://code.visualstudio.com/docs/getstarted/introvideos', desc: 'تعلم VS Code في أقل من ساعة' },
+          { label: 'Python Extension', url: 'https://marketplace.visualstudio.com/items?itemName=ms-python.python', desc: 'أفضل إضافة لكتابة Python باحترافية' },
+          { label: 'Prettier (تنسيق الكود)', url: 'https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode', desc: 'ينسق كودك تلقائياً ويجعله أنيقاً' }
+        ]
+      },
+      {
+        name: 'ChatGPT', emoji: '🤖', func: 'شريك برمجي يشرح ويصحح ويقترح', why: 'سرّع تعلمك بـ10x مع مساعد يرد في ثانية', link: 'https://chat.openai.com',
+        specifics: [
+          { label: 'Debug مع ChatGPT', url: 'https://chat.openai.com', desc: 'الصق الكود + الخطأ واحصل على الحل مشروحاً' },
+          { label: 'اطلب أفكار مشاريع', url: 'https://chat.openai.com', desc: 'مثال: "اقترح 5 مشاريع Python مناسبة للمبتدئين"' }
+        ]
+      }
+    ]
+  },
+
+  writing: {
+    video: [
+      {
+        name: 'YouTube — قنوات الكتابة المختارة', emoji: '▶️', func: 'أفضل قنوات تعلم الكتابة الإبداعية والاحترافية', why: 'كتّاب محترفون يشاركون أسرارهم مجاناً', link: 'https://www.youtube.com',
+        specifics: [
+          { label: 'Ellen Brock (كتابة روائية)', url: 'https://www.youtube.com/@EllenBrock', desc: 'نصائح احترافية من محررة روائية متمرسة' },
+          { label: 'Abbie Emmons (Creative Writing)', url: 'https://www.youtube.com/@abbieemmons', desc: 'كيف تكتب شخصيات وقصصاً مقنعة' },
+          { label: 'Brandon Sanderson (Lectures)', url: 'https://www.youtube.com/@BrandonSanderson', desc: 'دروس الكتابة الإبداعية من الجامعة — مجاناً' },
+          { label: 'قناة مهارات الكتابة بالعربية', url: 'https://www.youtube.com/results?search_query=تعلم+الكتابة+الابداعية+بالعربية', desc: 'ابحث عن "مهارات الكتابة" للعثور على قنوات عربية' }
+        ]
+      },
+      {
+        name: 'Medium', emoji: '✍️', func: 'اقرأ أفضل الكتّاب وانشر كتاباتك', why: 'التعرض لمئات الأساليب الكتابية يطوّر موهبتك تلقائياً', link: 'https://medium.com',
+        specifics: [
+          { label: 'The Writing Cooperative', url: 'https://medium.com/the-writing-cooperative', desc: 'أفضل نصائح الكتابة الاحترافية' },
+          { label: 'Better Humans (تطوير الذات والكتابة)', url: 'https://medium.com/better-humans', desc: 'مقالات حول العادات والإنتاجية الكتابية' },
+          { label: 'UX Collective (كتابة تقنية)', url: 'https://uxdesign.cc', desc: 'الكتابة في مجال التصميم وتجربة المستخدم' }
+        ]
+      },
+      {
+        name: 'Grammarly', emoji: '✅', func: 'تصحيح وتحسين أسلوب الكتابة الإنجليزية', why: 'يرصد الأخطاء ويقترح تحسينات الأسلوب تلقائياً', link: 'https://www.grammarly.com',
+        specifics: [
+          { label: 'Grammarly Handbook', url: 'https://www.grammarly.com/blog/category/handbook/', desc: 'دليل شامل لقواعد الإنجليزية' },
+          { label: 'Grammarly Blog — Writing Tips', url: 'https://www.grammarly.com/blog/writing-tips/', desc: 'نصائح يومية لتحسين الكتابة' }
+        ]
+      },
+      {
+        name: 'Google Docs', emoji: '📄', func: 'كتابة ومشاركة وتنظيم النصوص', why: 'مجاني + يحفظ تلقائياً + يمكن مشاركته للنقد والمراجعة', link: 'https://docs.google.com',
+        specifics: [
+          { label: 'Voice Typing (الكتابة بالصوت)', url: 'https://support.google.com/docs/answer/4492226', desc: 'سرّع كتابتك باستخدام صوتك' },
+          { label: 'Explore Tool (بحث ذكي)', url: 'https://support.google.com/docs/answer/9117850', desc: 'ابحث في الإنترنت دون مغادرة المستند' }
+        ]
+      },
+      {
+        name: 'ChatGPT', emoji: '🤖', func: 'محرر ومراجع وملهم كتابي ذكي', why: 'يراجع أسلوبك، يقترح بدائل، ويساعدك على كسر حاجز الكتابة', link: 'https://chat.openai.com',
+        specifics: [
+          { label: 'راجع مقالتي وحسّن الأسلوب', url: 'https://chat.openai.com', desc: 'مثال: "راجع هذه الفقرة وحسّن تدفقها مع الحفاظ على صوتي"' },
+          { label: 'ساعدني في كسر حاجز الكتابة', url: 'https://chat.openai.com', desc: 'مثال: "أريد الكتابة عن X — ساعدني في مقدمة مثيرة"' }
+        ]
+      }
+    ],
+    text: [
+      {
+        name: 'Medium', emoji: '✍️', func: 'اقرأ مقالات احترافية وانشر كتاباتك', why: 'مجتمع قراء حقيقيون يتفاعلون مع كتاباتك', link: 'https://medium.com',
+        specifics: [
+          { label: 'The Writing Cooperative', url: 'https://medium.com/the-writing-cooperative', desc: 'أفضل نصائح الكتابة الاحترافية بالإنجليزية' },
+          { label: 'Toward Data Science (كتابة تقنية)', url: 'https://towardsdatascience.com', desc: 'تعلم كيف يكتب الخبراء التقنيون' },
+          { label: 'ابدأ تدوينتك الأولى', url: 'https://medium.com/new-story', desc: 'انشر أول مقال لك في دقيقة واحدة' }
+        ]
+      },
+      {
+        name: 'LanguageTool', emoji: '🔤', func: 'تصحيح لغوي يدعم العربية والفرنسية والإنجليزية', why: 'البديل المجاني لـ Grammarly ويدعم لغات أكثر', link: 'https://languagetool.org',
+        specifics: [
+          { label: 'Language Tool Online', url: 'https://languagetool.org/', desc: 'الصق نصك وصحّحه فوراً — مجاناً' },
+          { label: 'إضافة المتصفح', url: 'https://languagetool.org/chrome', desc: 'يصحح أثناء الكتابة في أي موقع' },
+          { label: 'إضافة Google Docs', url: 'https://languagetool.org/gdocs', desc: 'تصحيح مباشر داخل مستنداتك' }
+        ]
+      },
+      {
+        name: 'Hemingway Editor', emoji: '📝', func: 'يجعل كتابتك أقوى وأوضح وأقصر', why: 'يكشف الجمل الطويلة والكلمات المعقدة ويقترح بدائل', link: 'https://hemingwayapp.com',
+        specifics: [
+          { label: 'Hemingway App Online (مجاني)', url: 'https://hemingwayapp.com/', desc: 'الصق نصك وشاهد درجة قابلية القراءة فوراً' }
+        ]
+      },
+      {
+        name: 'Google Docs', emoji: '📄', func: 'مساحة كتابة نظيفة مع تتبع التغييرات', why: 'مثالي لمراجعة الكتابات مع الآخرين والحصول على نقد بنّاء', link: 'https://docs.google.com',
+        specifics: [
+          { label: 'Version History (سجل النسخ)', url: 'https://support.google.com/docs/answer/190843', desc: 'تتبع تطور كتابتك عبر الوقت' },
+          { label: 'Suggesting Mode (وضع الاقتراحات)', url: 'https://support.google.com/docs/answer/6033474', desc: 'احصل على تعليقات محددة من محرريك' }
+        ]
+      },
+      {
+        name: 'ChatGPT', emoji: '🤖', func: 'محرر أدبي ذكي يحترم أسلوبك', why: 'يحسن دون أن يمحو صوتك — مراجع ذكي في أي وقت', link: 'https://chat.openai.com',
+        specifics: [
+          { label: 'تحسين الأسلوب', url: 'https://chat.openai.com', desc: 'مثال: "حسّن هذه الفقرة مع الحفاظ على نبرتي الشخصية"' },
+          { label: 'اقتراح عناوين جذابة', url: 'https://chat.openai.com', desc: 'مثال: "اقترح 10 عناوين مثيرة لمقال عن X"' }
+        ]
+      }
+    ],
+    interactive: [
+      {
+        name: 'Google Docs', emoji: '📄', func: 'كتابة تعاونية مع تغذية راجعة فورية', why: 'شارك كتابتك واحصل على تعليقات محددة من الآخرين', link: 'https://docs.google.com',
+        specifics: [
+          { label: 'انشر مع رابط للتعليق', url: 'https://support.google.com/docs/answer/2494822', desc: 'اجمع آراء الآخرين بطريقة منظمة' },
+          { label: 'إضافة LanguageTool في Docs', url: 'https://workspace.google.com/marketplace/app/languagetool/920090108478', desc: 'تصحيح لغوي متكامل مباشرة في Google Docs' }
+        ]
+      },
+      {
+        name: 'LanguageTool', emoji: '🔤', func: 'تصحيح فوري متعدد اللغات أثناء الكتابة', why: 'يعمل في كل مكان — المتصفح، الوورد، Google Docs', link: 'https://languagetool.org',
+        specifics: [
+          { label: 'Browser Extension', url: 'https://languagetool.org/chrome', desc: 'ثبّته مرة واحدة ويعمل في كل المواقع' },
+          { label: 'API للمطورين', url: 'https://languagetool.org/http-api/', desc: 'ادمجه في مشاريعك الشخصية' }
+        ]
+      },
+      {
+        name: 'Medium', emoji: '✍️', func: 'انشر وتفاعل مع مجتمع الكتّاب', why: 'النقد الحقيقي من القراء يطوّرك أسرع من أي كتاب', link: 'https://medium.com',
+        specifics: [
+          { label: 'ابدأ تدوينتك', url: 'https://medium.com/new-story', desc: 'انشر أول مقال واحصل على ردود فعل حقيقية' },
+          { label: 'Writing Challenge Communities', url: 'https://medium.com/tag/writing-challenge', desc: 'شارك في تحديات الكتابة الجماعية' }
+        ]
+      },
+      {
+        name: 'Grammarly', emoji: '✅', func: 'مصحح ذكي يتفاعل مع كتابتك فورياً', why: 'يشرح سبب كل خطأ — تتعلم وأنت تكتب', link: 'https://www.grammarly.com',
+        specifics: [
+          { label: 'Grammarly Writing Goals', url: 'https://support.grammarly.com/hc/en-us/articles/115000091811', desc: 'حدد هدف كتابتك (رسمية/غير رسمية) ليتكيف معها' },
+          { label: 'Grammarly Keyboard (موبايل)', url: 'https://www.grammarly.com/keyboard', desc: 'تصحيح الكتابة مباشرة على هاتفك' }
+        ]
+      },
+      {
+        name: 'ChatGPT', emoji: '🤖', func: 'تدريب تفاعلي على الكتابة الإبداعية', why: 'أعطيك تمارين، تكتب، يراجع، تكتب أفضل', link: 'https://chat.openai.com',
+        specifics: [
+          { label: 'طلب تمرين كتابي يومي', url: 'https://chat.openai.com', desc: 'مثال: "أعطني تمرين كتابة لمدة 10 دقائق عن موضوع مثير"' },
+          { label: 'مراجعة ونقد أسلوبي', url: 'https://chat.openai.com', desc: 'مثال: "انقد هذه القصة القصيرة بصدق ودقة"' }
+        ]
+      }
+    ],
+    mixed: [
+      {
+        name: 'Medium', emoji: '✍️', func: 'اقرأ أفضل الكتّاب وانشر ونمُ معاً', why: 'أفضل بيئة لبناء عادة القراءة والكتابة في مكان واحد', link: 'https://medium.com',
+        specifics: [
+          { label: 'اقرأ في مجالك', url: 'https://medium.com/topics', desc: 'اختر موضوعك واكتشف أفضل الكتّاب فيه' },
+          { label: 'Medium Partner Program', url: 'https://medium.com/earn', desc: 'اربح مالاً من كتاباتك إذا نمت قاعدة قرائك' }
+        ]
+      },
+      {
+        name: 'LanguageTool', emoji: '🔤', func: 'مصحح لغوي متعدد اللغات', why: 'يدعم العربية والفرنسية والإنجليزية — أداة واحدة تكفي', link: 'https://languagetool.org',
+        specifics: [
+          { label: 'تثبيت إضافة المتصفح', url: 'https://languagetool.org/chrome', desc: 'يصحح في كل موقع تكتب فيه تلقائياً' },
+          { label: 'نسخة الديسكتوب', url: 'https://languagetool.org/desktop/', desc: 'يعمل مع Word وLibreOffice وكل التطبيقات' }
+        ]
+      },
+      {
+        name: 'Google Docs', emoji: '📄', func: 'مساحة كتابة مجانية ومنظمة', why: 'احتفظ بكل كتاباتك منظمة ومتاحة من أي جهاز', link: 'https://docs.google.com',
+        specifics: [
+          { label: 'انشئ مجلد "كتاباتي"', url: 'https://drive.google.com', desc: 'نظّم مقالاتك وقصصك وتمارينك بشكل منهجي' },
+          { label: 'Writing Templates', url: 'https://docs.google.com/templates', desc: 'قوالب جاهزة للمقالات والرسائل والتقارير' }
+        ]
+      },
+      {
+        name: 'Hemingway Editor', emoji: '📝', func: 'تبسيط الكتابة وزيادة وضوحها', why: 'كتابة واضحة = قراء أكثر وتأثير أعمق', link: 'https://hemingwayapp.com',
+        specifics: [
+          { label: 'Hemingway App (مجاني على الويب)', url: 'https://hemingwayapp.com/', desc: 'الصق نصك وشاهد ما يحتاج تحسيناً' }
+        ]
+      },
+      {
+        name: 'ChatGPT', emoji: '🤖', func: 'شريك كتابي ذكي ومحرر في نفس الوقت', why: 'يساعدك على البدء، والتطوير، والمراجعة النهائية', link: 'https://chat.openai.com',
+        specifics: [
+          { label: 'خطة مقال أسبوعي', url: 'https://chat.openai.com', desc: 'مثال: "ساعدني في التخطيط لمقال أسبوعي بمواضيع متنوعة"' },
+          { label: 'مراجعة شاملة للأسلوب', url: 'https://chat.openai.com', desc: 'مثال: "راجع مقالي واقترح تحسينات في البنية والأسلوب"' }
+        ]
+      }
+    ]
+  },
+
+  culture: {
+    video: [
+      {
+        name: 'TED Talks', emoji: '🎙️', func: 'محاضرات من أفضل العقول في كل مجال', why: 'أفكار تغير طريقة تفكيرك في 18 دقيقة أو أقل', link: 'https://www.ted.com',
+        specifics: [
+          { label: 'TED Talks — Science', url: 'https://www.ted.com/topics/science', desc: 'أحدث الأفكار العلمية من علماء حقيقيين' },
+          { label: 'TED Talks — Philosophy', url: 'https://www.ted.com/topics/philosophy', desc: 'أسئلة فلسفية كبيرة بأسلوب بسيط ومثير' },
+          { label: 'TED Talks — History', url: 'https://www.ted.com/topics/history', desc: 'قصص تاريخية تُعاد اكتشافها بنظرة جديدة' },
+          { label: 'TEDx بالعربية', url: 'https://www.youtube.com/results?search_query=TEDx+arabic', desc: 'محاضرات TEDx بالعربية من المنطقة العربية' }
+        ]
+      },
+      {
+        name: 'YouTube — قنوات ثقافية مختارة', emoji: '▶️', func: 'أفضل القنوات لتوسيع الثقافة العامة', why: 'محتوى موثوق ومثير يجعل التعلم متعة حقيقية', link: 'https://www.youtube.com',
+        specifics: [
+          { label: 'Kurzgesagt (علوم وفلسفة بالرسوم)', url: 'https://www.youtube.com/@kurzgesagt', desc: 'أعقد المفاهيم بأجمل الرسوم المتحركة' },
+          { label: 'CrashCourse (تاريخ وعلوم ومزيد)', url: 'https://www.youtube.com/@crashcourse', desc: 'مقررات دراسية كاملة بأسلوب ممتع' },
+          { label: 'Vsauce (أسئلة عميقة)', url: 'https://www.youtube.com/@Vsauce', desc: 'أسئلة غريبة تقودك إلى معرفة عميقة' },
+          { label: 'قناة أكاديمية بالعربي', url: 'https://www.youtube.com/@AcademiaArabic', desc: 'علوم وثقافة عامة بالعربية الفصحى' },
+          { label: 'Nota Bene (تاريخ بالفرنسية)', url: 'https://www.youtube.com/@NotaBeneYT', desc: 'تاريخ العالم بأسلوب سردي رائع' }
+        ]
+      },
+      {
+        name: 'Coursera', emoji: '🎓', func: 'دورات أكاديمية من أفضل الجامعات', why: 'تعلم منهجي ومعمّق بدل التشتت بين المصادر', link: 'https://www.coursera.org',
+        specifics: [
+          { label: 'A Brief History of Humankind (Yuval Harari)', url: 'https://www.coursera.org/learn/human-evolution', desc: 'مسار تاريخ البشرية من جامعة تل أبيب' },
+          { label: 'Science of Well-Being (Yale)', url: 'https://www.coursera.org/learn/the-science-of-well-being', desc: 'الأكثر تسجيلاً في التاريخ — علم السعادة' },
+          { label: 'Philosophy, Science and Religion', url: 'https://www.coursera.org/learn/philosophy-science-religion-1', desc: 'العلاقة بين الفلسفة والعلم والدين' }
+        ]
+      },
+      {
+        name: 'Wikipedia', emoji: '📖', func: 'نقطة انطلاق لاستكشاف أي موضوع', why: 'كل مقال يقودك إلى 10 مقالات جديدة — الفضول لا ينتهي', link: 'https://www.wikipedia.org',
+        specifics: [
+          { label: 'مقال اليوم', url: 'https://ar.wikipedia.org/wiki/%D9%88%D9%8A%D9%83%D9%8A%D8%A8%D9%8A%D8%AF%D9%8A%D8%A7:%D9%85%D9%82%D8%A7%D9%84%D8%A9_%D8%A7%D9%84%D9%8A%D9%88%D9%85', desc: 'مقال مميز يومياً بالعربية' },
+          { label: 'Wikipedia Random Article', url: 'https://en.wikipedia.org/wiki/Special:Random', desc: 'اكتشف موضوعاً عشوائياً — متعة فكرية' }
+        ]
+      },
+      {
+        name: 'ChatGPT', emoji: '🤖', func: 'موسوعة حوارية تجيب عن أي سؤال', why: 'اسأل، ناقش، عمّق — محاور فكري لا يمل', link: 'https://chat.openai.com',
+        specifics: [
+          { label: 'استكشاف موضوع بعمق', url: 'https://chat.openai.com', desc: 'مثال: "اشرح لي نظرية النسبية بأسلوب بسيط ثم أعمق"' },
+          { label: 'اطلب خطة ثقافية أسبوعية', url: 'https://chat.openai.com', desc: 'مثال: "أعطني خطة لتعلم شيء جديد كل أسبوع في مجالات متنوعة"' }
+        ]
+      }
+    ],
+    text: [
+      {
+        name: 'Wikipedia', emoji: '📖', func: 'الموسوعة الأضخم في التاريخ', why: 'نقطة البداية المثلى لاستكشاف أي موضوع بعمق', link: 'https://www.wikipedia.org',
+        specifics: [
+          { label: 'ويكيبيديا بالعربية', url: 'https://ar.wikipedia.org', desc: 'أكثر من مليون مقال بالعربية' },
+          { label: 'ويكيبيديا بالفرنسية', url: 'https://fr.wikipedia.org', desc: 'ثاني أكبر ويكيبيديا بعد الإنجليزية' },
+          { label: 'مقالات مميزة (أفضل المقالات)', url: 'https://en.wikipedia.org/wiki/Wikipedia:Featured_articles', desc: 'أفضل ما كتبه مجتمع ويكيبيديا' }
+        ]
+      },
+      {
+        name: 'Goodreads', emoji: '📚', func: 'اكتشف الكتب التي تناسبك تماماً', why: 'مجتمع 150 مليون قارئ يساعدك في اختيار قراءتك القادمة', link: 'https://www.goodreads.com',
+        specifics: [
+          { label: 'Best Books Ever (قائمة عالمية)', url: 'https://www.goodreads.com/list/show/1.Best_Books_Ever', desc: 'أكثر من 80,000 كتاب مرتبة بالتصويت الشعبي' },
+          { label: 'Goodreads Choice Awards', url: 'https://www.goodreads.com/choiceawards/', desc: 'أفضل كتاب لكل عام بكل التصنيفات' },
+          { label: 'Reading Challenge', url: 'https://www.goodreads.com/challenges/show/11636', desc: 'ضع هدفاً سنوياً للقراءة وتتبع تقدمك' }
+        ]
+      },
+      {
+        name: 'Pocket', emoji: '📌', func: 'احفظ كل مقال يثير اهتمامك', why: 'لا تفوّت أي مقال مثير — احفظه واقرأه في وقتك المناسب', link: 'https://getpocket.com',
+        specifics: [
+          { label: 'Pocket Recommended', url: 'https://getpocket.com/explore', desc: 'أفضل المقالات المختارة بواسطة المجتمع' },
+          { label: 'Pocket for Firefox/Chrome', url: 'https://getpocket.com/firefox/', desc: 'احفظ أي مقال بنقرة واحدة من متصفحك' }
+        ]
+      },
+      {
+        name: 'Coursera', emoji: '🎓', func: 'تعلم منهجي في المجالات التي تحبها', why: 'عمق أكاديمي حقيقي بدل المعرفة السطحية', link: 'https://www.coursera.org',
+        specifics: [
+          { label: 'Arts and Humanities', url: 'https://www.coursera.org/browse/arts-and-humanities', desc: 'تاريخ الفن والأدب والفلسفة من جامعات عالمية' },
+          { label: 'Social Sciences', url: 'https://www.coursera.org/browse/social-sciences', desc: 'علم النفس والاقتصاد والعلوم السياسية' }
+        ]
+      },
+      {
+        name: 'ChatGPT', emoji: '🤖', func: 'موسوعة حوارية تعمّق وتربط المعارف', why: 'يساعدك على ربط المعارف وبناء فهم أعمق وليس مجرد معلومات', link: 'https://chat.openai.com',
+        specifics: [
+          { label: 'اطلب ملخص كتاب', url: 'https://chat.openai.com', desc: 'مثال: "لخّص كتاب Sapiens وأخبرني بأهم 5 أفكار"' },
+          { label: 'ابنِ خريطة معرفية', url: 'https://chat.openai.com', desc: 'مثال: "كيف ترتبط الفلسفة الرواقية بعلم النفس الحديث؟"' }
+        ]
+      }
+    ],
+    interactive: [
+      {
+        name: 'Coursera', emoji: '🎓', func: 'دورات تفاعلية مع اختبارات ومناقشات', why: 'تعلم حقيقي مع زملاء من كل العالم وأساتذة حقيقيين', link: 'https://www.coursera.org',
+        specifics: [
+          { label: 'Learning How to Learn', url: 'https://www.coursera.org/learn/learning-how-to-learn', desc: 'الأكثر تسجيلاً — كيف تتعلم بكفاءة' },
+          { label: 'Modern and Contemporary Art', url: 'https://www.coursera.org/learn/modern-art-ideas', desc: 'تاريخ الفن الحديث من MoMA نيويورك' }
+        ]
+      },
+      {
+        name: 'TED Talks', emoji: '🎙️', func: 'استمع ثم فكّر وناقش', why: 'كل محاضرة تدعوك لإعادة التفكير في ما تعتقده', link: 'https://www.ted.com',
+        specifics: [
+          { label: 'TED Ideas Worth Spreading', url: 'https://ideas.ted.com/', desc: 'مقالات موسعة حول موضوعات المحاضرات' },
+          { label: 'TED-Ed (للتعليم)', url: 'https://ed.ted.com/', desc: 'دروس تفاعلية مبنية حول فيديوهات TED' }
+        ]
+      },
+      {
+        name: 'Wikipedia', emoji: '📖', func: 'استكشاف تفاعلي للمعرفة', why: 'ابدأ بموضوع واستكشف مئة موضوع عبر الروابط الداخلية', link: 'https://www.wikipedia.org',
+        specifics: [
+          { label: 'Random Article (موضوع عشوائي)', url: 'https://en.wikipedia.org/wiki/Special:Random', desc: 'تحدٍّ: اقرأ مقالاً عشوائياً كل يوم' },
+          { label: 'Wikipedia Rabbit Hole', url: 'https://www.wikipedia.org', desc: 'ابدأ بأي موضوع واتبع الروابط — ستتفاجأ أين ستنتهي' }
+        ]
+      },
+      {
+        name: 'Pocket', emoji: '📌', func: 'اجمع ونظّم المحتوى الذي يثير اهتمامك', why: 'بناء مكتبة شخصية من المحتوى الموثوق والمثير', link: 'https://getpocket.com',
+        specifics: [
+          { label: 'Pocket Explore', url: 'https://getpocket.com/explore', desc: 'اكتشف مقالات مختارة في مواضيع مختلفة' },
+          { label: 'Tags Organization', url: 'https://getpocket.com/', desc: 'نظّم مقالاتك بوسوم موضوعية' }
+        ]
+      },
+      {
+        name: 'ChatGPT', emoji: '🤖', func: 'شريك نقاش فكري لا ينفد', why: 'ناقشه في أي فكرة — يتحداك ويعمّق تفكيرك', link: 'https://chat.openai.com',
+        specifics: [
+          { label: 'ناقش فكرة فلسفية', url: 'https://chat.openai.com', desc: 'مثال: "ناقشني في مفهوم الحرية عند سارتر وكيف يطبّق اليوم"' },
+          { label: 'اختبار معرفي تفاعلي', url: 'https://chat.openai.com', desc: 'مثال: "اختبرني بأسئلة ثقافية عامة وصحح إجاباتي"' }
+        ]
+      }
+    ],
+    mixed: [
+      {
+        name: 'TED Talks', emoji: '🎙️', func: 'أفضل محاضرات العالم في كل المجالات', why: 'الجسر المثالي بين الترفيه والتعلم العميق', link: 'https://www.ted.com',
+        specifics: [
+          { label: 'TED Talks Daily (بودكاست)', url: 'https://www.ted.com/talks?sort=newest', desc: 'استمع أثناء التنقل — محاضرة يومية' },
+          { label: 'TED-Ed Lessons', url: 'https://ed.ted.com/lessons', desc: 'دروس تعليمية مصورة حول أفكار مثيرة' },
+          { label: 'الأكثر مشاهدة على الإطلاق', url: 'https://www.ted.com/playlists/171/the_most_popular_talks_of_all', desc: 'ابدأ بأكثر المحاضرات تأثيراً' }
+        ]
+      },
+      {
+        name: 'Wikipedia', emoji: '📖', func: 'موسوعة لا حدود لها تتجدد يومياً', why: 'أي موضوع تخطر في بالك — هو موجود وموثق', link: 'https://www.wikipedia.org',
+        specifics: [
+          { label: 'اقرأ عشوائياً يومياً', url: 'https://en.wikipedia.org/wiki/Special:Random', desc: 'تحدٍّ ممتع — مقال عشوائي كل يوم' },
+          { label: 'Wikipedia بالعربية', url: 'https://ar.wikipedia.org', desc: 'أكثر من مليون مقال بالعربية' }
+        ]
+      },
+      {
+        name: 'Coursera', emoji: '🎓', func: 'دورات من أفضل الجامعات العالمية مجاناً', why: 'تعلم منهجي حقيقي بدل التشتت بين المصادر', link: 'https://www.coursera.org',
+        specifics: [
+          { label: 'Free Courses (Audit)', url: 'https://www.coursera.org/courses?query=free', desc: 'آلاف الدورات مجانية للمراجعة بدون شهادة' },
+          { label: 'Science & Philosophy', url: 'https://www.coursera.org/browse/arts-and-humanities/philosophy', desc: 'فلسفة وعلوم من جامعات عالمية' }
+        ]
+      },
+      {
+        name: 'Goodreads', emoji: '📚', func: 'اكتشف كتبك القادمة واتبع تقدم قراءتك', why: 'مجتمع القراء يوجهك نحو الكتب الأكثر تأثيراً', link: 'https://www.goodreads.com',
+        specifics: [
+          { label: 'Best Nonfiction Books', url: 'https://www.goodreads.com/list/show/12719', desc: 'أفضل كتب المعرفة والثقافة العامة' },
+          { label: 'Annual Reading Challenge', url: 'https://www.goodreads.com/challenges', desc: 'التزم بقراءة عدد كتب محدد هذا العام' }
+        ]
+      },
+      {
+        name: 'ChatGPT', emoji: '🤖', func: 'مرافق معرفي يوجّه فضولك ويعمّقه', why: 'يحوّل أي سؤال عشوائي إلى رحلة معرفية ممتعة', link: 'https://chat.openai.com',
+        specifics: [
+          { label: 'اطلب توصية ثقافية', url: 'https://chat.openai.com', desc: 'مثال: "أحب التاريخ والعلوم — اقترح 5 كتب تجمع بينهما"' },
+          { label: 'ملخص أسبوعي للتعلم', url: 'https://chat.openai.com', desc: 'مثال: "لخّص لي أهم ما تعلمته هذا الأسبوع في 5 نقاط"' }
+        ]
+      }
+    ]
+  }
+};
+
+// ===================== DATA: SCHEDULE =====================
+function getScheduleData() {
+  const { goal, time, style } = answers;
+  const days = ['الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت', 'الأحد'];
+
+  let duration, daysActive;
+  if (time === 'lt2') { duration = '15–20 دق'; daysActive = 5; }
+  else if (time === '2to5') { duration = '25–30 دق'; daysActive = 6; }
+  else { duration = '45–60 دق'; daysActive = 6; }
+
+  const schedules = {
+    language: [
+      { activity: 'حفظ مفردات جديدة', tool: 'Duolingo / Anki', badge: 'badge-blue' },
+      { activity: 'مشاهدة محتوى باللغة', tool: 'YouTube / TV5Monde', badge: 'badge-purple' },
+      { activity: 'تمارين قراءة', tool: 'LingQ / Busuu', badge: 'badge-green' },
+      { activity: 'مراجعة المفردات', tool: 'Anki', badge: 'badge-blue' },
+      { activity: 'ممارسة المحادثة', tool: 'Tandem / ChatGPT', badge: 'badge-amber' },
+      { activity: 'مراجعة أسبوعية شاملة', tool: 'كل الأدوات', badge: 'badge-green' },
+      { activity: 'راحة أو نشاط حر', tool: 'اختياري', badge: 'badge-rest' }
+    ],
+    revision: [
+      { activity: 'مراجعة دروس جديدة', tool: 'Khan Academy', badge: 'badge-blue' },
+      { activity: 'حل تمارين تطبيقية', tool: 'Quizlet / GeoGebra', badge: 'badge-green' },
+      { activity: 'مراجعة ملاحظات', tool: 'Notion', badge: 'badge-purple' },
+      { activity: 'حل أسئلة امتحانات سابقة', tool: 'ChatGPT', badge: 'badge-amber' },
+      { activity: 'اختبار ذاتي', tool: 'Quizlet', badge: 'badge-blue' },
+      { activity: 'مراجعة شاملة للأسبوع', tool: 'Anki + Notion', badge: 'badge-green' },
+      { activity: 'راحة أو مراجعة خفيفة', tool: 'اختياري', badge: 'badge-rest' }
+    ],
+    programming: [
+      { activity: 'تعلم مفاهيم جديدة', tool: 'freeCodeCamp', badge: 'badge-blue' },
+      { activity: 'تطبيق بالكتابة الفعلية', tool: 'Replit / VS Code', badge: 'badge-green' },
+      { activity: 'حل تحديات برمجية', tool: 'Codecademy', badge: 'badge-purple' },
+      { activity: 'قراءة توثيق وأكواد', tool: 'W3Schools / Stack Overflow', badge: 'badge-amber' },
+      { activity: 'العمل على المشروع الشخصي', tool: 'GitHub', badge: 'badge-blue' },
+      { activity: 'مراجعة + تحسين الكود', tool: 'ChatGPT', badge: 'badge-green' },
+      { activity: 'راحة أو استكشاف حر', tool: 'اختياري', badge: 'badge-rest' }
+    ],
+    writing: [
+      { activity: 'قراءة مقالات احترافية', tool: 'Medium', badge: 'badge-blue' },
+      { activity: 'تمرين كتابة: فقرة قصيرة', tool: 'Google Docs', badge: 'badge-green' },
+      { activity: 'مراجعة وتصحيح', tool: 'LanguageTool / Grammarly', badge: 'badge-purple' },
+      { activity: 'تحليل أسلوب كاتب', tool: 'Medium', badge: 'badge-amber' },
+      { activity: 'كتابة مقال كامل', tool: 'Google Docs', badge: 'badge-blue' },
+      { activity: 'مراجعة شاملة + نشر', tool: 'Medium / ChatGPT', badge: 'badge-green' },
+      { activity: 'راحة أو قراءة حرة', tool: 'اختياري', badge: 'badge-rest' }
+    ],
+    culture: [
+      { activity: 'قراءة مقال ثقافي', tool: 'Wikipedia / Pocket', badge: 'badge-blue' },
+      { activity: 'مشاهدة محاضرة', tool: 'TED Talks', badge: 'badge-purple' },
+      { activity: 'قراءة فصل من كتاب', tool: 'Goodreads', badge: 'badge-green' },
+      { activity: 'استكشاف موضوع جديد', tool: 'Coursera', badge: 'badge-amber' },
+      { activity: 'كتابة ملخص ما تعلمت', tool: 'Google Docs / Notion', badge: 'badge-blue' },
+      { activity: 'مراجعة + مشاركة معرفة', tool: 'ChatGPT', badge: 'badge-green' },
+      { activity: 'راحة أو نشاط إبداعي', tool: 'اختياري', badge: 'badge-rest' }
+    ]
+  };
+
+  const acts = schedules[goal] || schedules.culture;
+  return days.map((day, i) => ({
+    day,
+    activity: acts[i]?.activity || 'راحة',
+    tool: acts[i]?.tool || 'اختياري',
+    badge: acts[i]?.badge || 'badge-rest',
+    duration: i === 6 ? 'اختياري' : (i >= daysActive ? '— راحة' : duration)
+  }));
+}
+
+// ===================== DATA: TIPS =====================
+function getTips() {
+  const { goal, time, level } = answers;
+  const tips = [];
+
+  // Universal tips (always 2)
+  tips.push({ icon: '⏰', text: 'خصص وقتاً ثابتاً يومياً حتى لو كان 15 دقيقة فقط — الانتظام هو مفتاح النجاح.' });
+  tips.push({ icon: '📊', text: 'سجّل تقدمك أسبوعياً حتى تلاحظ تطورك وتحافظ على الحافز.' });
+
+  // By time
+  if (time === 'lt2') tips.push({ icon: '🌱', text: 'لا تضغط على نفسك. الاستمرارية أهم من الكمية. 15 دقيقة يومياً أفضل من 3 ساعات مرة واحدة.' });
+  else if (time === '2to5') tips.push({ icon: '⚖️', text: 'وزّع وقتك بذكاء بين التعلم والممارسة. القاعدة المثالية: 40% تعلم جديد + 60% تطبيق وممارسة.' });
+  else tips.push({ icon: '🍅', text: 'لا تنسَ أخذ فترات راحة. تقنية بومودورو (25 دقيقة عمل + 5 دقائق راحة) ممتازة للتركيز والإنتاجية.' });
+
+  // By goal
+  if (goal === 'language') tips.push({ icon: '📱', text: 'استعمل اللغة في حياتك اليومية: غيّر لغة هاتفك، استمع لأغانٍ، شاهد أفلاماً بتلك اللغة.' });
+  else if (goal === 'revision') tips.push({ icon: '🧠', text: 'ركّز على فهم المفاهيم بدل الحفظ الأعمى. حاول شرح الدرس لشخص آخر لتثبيت الفهم — هذا هو أقوى أسلوب.' });
+  else if (goal === 'programming') tips.push({ icon: '⌨️', text: 'اكتب كوداً كل يوم حتى لو كان بسيطاً. البرمجة مهارة عملية تتطلب ممارسة مستمرة — الكثرة تصنع المهارة.' });
+  else if (goal === 'writing') tips.push({ icon: '📚', text: 'اقرأ كل يوم على الأقل 20 دقيقة. الكتابة الجيدة تبدأ بالقراءة الجيدة — كل كاتب عظيم كان قارئاً نهماً.' });
+  else tips.push({ icon: '🔗', text: 'لا تحاول حفظ كل شيء. الهدف هو بناء فضول مستمر وربط المعارف ببعضها لبناء فهم أعمق.' });
+
+  // By level
+  if (level === 'beginner') tips.push({ icon: '🐢', text: 'لا تحاول حفظ كل شيء دفعة واحدة. ركّز على الفهم والممارسة التدريجية — كل خبير كان مبتدئاً يوماً ما.' });
+  else if (level === 'intermediate') tips.push({ icon: '🚀', text: 'حان وقت الخروج من منطقة الراحة. تحدَّ نفسك بمحتوى أصعب قليلاً مما اعتدت عليه لتتقدم بسرعة.' });
+  else tips.push({ icon: '🎓', text: 'في هذا المستوى، التعليم أفضل طريقة للتعلم. حاول مساعدة الآخرين أو إنشاء محتوى تعليمي.' });
+
+  return tips;
+}
+
+// ===================== LABEL MAPS =====================
+const goalLabels = { language: '🌍 تعلم لغة جديدة', revision: '📚 مراجعة دراسية', programming: '💻 البرمجة', writing: '✍️ مهارات كتابية', culture: '🧠 ثقافة عامة' };
+const levelLabels = { beginner: '🟢 مبتدئ', intermediate: '🟡 متوسط', advanced: '🔴 متقدم' };
+const timeLabels = { lt2: '⏱️ أقل من ساعتين', '2to5': '⏰ 2–5 ساعات', gt5: '🕐 أكثر من 5 ساعات' };
+const styleLabels = { video: '🎥 فيديوهات', text: '📖 قراءة نصوص', interactive: '🎮 تفاعلي', mixed: '🔄 مزيج' };
+
+// ===================== BUILD RESULTS =====================
+function buildResults() {
+  const { goal, level, time, style } = answers;
+
+  // Summary tags
+  const summaryEl = document.getElementById('resultsSummary');
+  summaryEl.innerHTML = [
+    goalLabels[goal], levelLabels[level], timeLabels[time], styleLabels[style]
+  ].map(t => `<div class="summary-tag">${t}</div>`).join('');
+
+  // ---- SECTION 1: Plan ----
+  let plan;
+  if (goal === 'language') {
+    const lvl = answers.level;
+    const t = answers.time;
+    if (lvl === 'advanced') {
+      plan = planData.language.advanced[t] || planData.language.advanced['2to5'];
+    } else {
+      plan = planData.language[lvl][t];
+    }
+  } else if (goal === 'revision') {
+    plan = planData.revision[level];
+  } else if (goal === 'programming') {
+    plan = planData.programming[level];
+  } else if (goal === 'writing') {
+    plan = planData.writing[level];
+  } else {
+    plan = planData.culture[level];
+  }
+
+  let planHTML = `<div class="plan-goal">🎯 <strong>هدفك:</strong> ${plan.goal}</div>`;
+  planHTML += '<div class="phases-container">';
+  plan.phases.forEach((ph, i) => {
+    planHTML += `
+      <div class="phase-card">
+        <div class="phase-number">${i + 1}</div>
+        <div class="phase-content">
+          <div class="phase-title">${ph.title}</div>
+          <div class="phase-desc">${ph.desc}</div>
+        </div>
+      </div>`;
+  });
+  planHTML += '</div>';
+  document.getElementById('planContent').innerHTML = planHTML;
+
+  // ---- SECTION 2: Tools ----
+  const toolsList = (toolsData[goal] && toolsData[goal][style]) ? toolsData[goal][style] : toolsData[goal]?.mixed || [];
+  let toolsHTML = '<div class="tools-grid">';
+  toolsList.slice(0, 5).forEach(t => {
+    // Build specifics block
+    let specificsHTML = '';
+    if (t.specifics && t.specifics.length > 0) {
+      specificsHTML = `
+        <div class="tool-specifics">
+          <div class="tool-specifics-title">🎯 روابط مباشرة موصى بها</div>
+          ${t.specifics.map(s => `
+            <div class="specific-item">
+              <span class="specific-bullet"></span>
+              <div>
+                <a href="${s.url}" target="_blank" rel="noopener noreferrer" class="specific-link">${s.label}</a>
+                <span class="specific-desc"> — ${s.desc}</span>
+              </div>
+            </div>
+          `).join('')}
+        </div>`;
+    }
+    toolsHTML += `
+      <div class="tool-card">
+        <span class="tool-emoji">${t.emoji}</span>
+        <div class="tool-info">
+          <div class="tool-name">${t.name}</div>
+          <div class="tool-function">${t.func}</div>
+          <div class="tool-why">✦ ${t.why}</div>
+          <div class="tool-links-row">
+            <a href="${t.link}" target="_blank" rel="noopener noreferrer" class="tool-link">🔗 الموقع الرسمي</a>
+          </div>
+          ${specificsHTML}
+        </div>
+      </div>`;
+  });
+  toolsHTML += '</div>';
+  document.getElementById('toolsContent').innerHTML = toolsHTML;
+
+  // ---- SECTION 3: Schedule ----
+  const schedRows = getScheduleData();
+  let schHTML = `
+    <div class="schedule-table-wrapper">
+      <table class="schedule-table">
+        <thead>
+          <tr>
+            <th>اليوم</th>
+            <th>النشاط</th>
+            <th>الأداة</th>
+            <th>المدة</th>
+          </tr>
+        </thead>
+        <tbody>`;
+  schedRows.forEach(row => {
+    schHTML += `
+          <tr>
+            <td class="day-name">${row.day}</td>
+            <td><span class="activity-badge ${row.badge}">${row.activity}</span></td>
+            <td style="color:var(--medium); font-size:0.85rem">${row.tool}</td>
+            <td><span class="duration-badge">${row.duration}</span></td>
+          </tr>`;
+  });
+  schHTML += `
+        </tbody>
+      </table>
+    </div>`;
+  document.getElementById('scheduleContent').innerHTML = schHTML;
+
+  // ---- SECTION 4: Tips ----
+  const tips = getTips();
+  let tipsHTML = '<div class="tips-grid">';
+  tips.forEach(tip => {
+    tipsHTML += `
+      <div class="tip-card">
+        <span class="tip-icon">${tip.icon}</span>
+        <p class="tip-text">${tip.text}</p>
+      </div>`;
+  });
+  tipsHTML += '</div>';
+  document.getElementById('tipsContent').innerHTML = tipsHTML;
+}
+</script>
+</body>
+</html>
